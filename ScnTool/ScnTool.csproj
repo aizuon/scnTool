@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8269BD68-C6C3-4946-9584-C08DF790186E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>NetsphereScnTool</RootNamespace>
+    <AssemblyName>NetsphereScnTool</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>new_logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\CustomListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Constants.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Forms\ImportOBJView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportOBJView.Designer.cs">
+      <DependentUpon>ImportOBJView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ScenarioView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ScenarioView.Designer.cs">
+      <DependentUpon>ScenarioView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ObjClass\Extent.cs" />
+    <Compile Include="ObjClass\Mtl.cs" />
+    <Compile Include="ObjClass\Obj.cs" />
+    <Compile Include="ObjClass\Types\Color.cs" />
+    <Compile Include="ObjClass\Types\Face.cs" />
+    <Compile Include="ObjClass\Types\IType.cs" />
+    <Compile Include="ObjClass\Types\Material.cs" />
+    <Compile Include="ObjClass\Types\Normal.cs" />
+    <Compile Include="ObjClass\Types\TextureVertex.cs" />
+    <Compile Include="ObjClass\Types\Vertex.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scene\Chunks\Animations.cs" />
+    <Compile Include="Scene\Chunks\BoneChunk.cs" />
+    <Compile Include="Scene\Chunks\BoneSystemChunk.cs" />
+    <Compile Include="Scene\Chunks\BoxChunk.cs" />
+    <Compile Include="Scene\Chunks\ModelChunk.cs" />
+    <Compile Include="Scene\Chunks\SceneChunk.cs" />
+    <Compile Include="Scene\Chunks\ShapeChunk.cs" />
+    <Compile Include="Scene\Chunks\SkyDirect1Chunk.cs" />
+    <Compile Include="Scene\Constants.cs" />
+    <Compile Include="Scene\SceneContainer.cs" />
+    <Compile Include="UndoRedo\SceneUndoManager.cs" />
+    <Compile Include="UndoRedo\UndoSystem.cs" />
+    <Compile Include="Utility\Obj_Exporter.cs" />
+    <Compile Include="Utility\Obj_Importer.cs" />
+    <Compile Include="Utility\SortableBindingList.cs" />
+    <EmbeddedResource Include="Forms\ImportOBJView.resx">
+      <DependentUpon>ImportOBJView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ScenarioView.resx">
+      <DependentUpon>ScenarioView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\bone.png" />
+    <None Include="images\bone_system.png" />
+    <None Include="images\box.png" />
+    <None Include="images\model.png" />
+    <None Include="images\shape.png" />
+    <None Include="images\sky.png" />
+    <Content Include="new_logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UndoRedo\Events\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlubLib\BlubLib.csproj">
+      <Project>{F42D1C22-3616-4FD2-8F8A-3B4826B37894}</Project>
+      <Name>BlubLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
