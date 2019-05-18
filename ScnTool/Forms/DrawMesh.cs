@@ -9,6 +9,9 @@ namespace NetsphereScnTool.Forms
     public partial class DrawMesh : Form
     {
         private readonly MeshData _mesh;
+        private float rotationx = 1.00f;
+        private float rotationz = 0.00f;
+        private float scale = 0.05f;
 
         public DrawMesh(MeshData mesh)
         {
@@ -23,8 +26,9 @@ namespace NetsphereScnTool.Forms
             float centerX = ClientSize.Width / 2.0f;
             float centerY = ClientSize.Height / 2.0f;
 
-            var r = Matrix4x4.CreateRotationX(1.00f);
-            var s = Matrix4x4.CreateScale(0.05f);
+            var rx = Matrix4x4.CreateRotationX(rotationx);
+            var rz = Matrix4x4.CreateRotationZ(rotationz);
+            var s = Matrix4x4.CreateScale(scale);
             var t = Matrix4x4.CreateTranslation(-50, -170, 0);
 
             var v3list = new List<Vector3>();
@@ -33,7 +37,8 @@ namespace NetsphereScnTool.Forms
             {
                 var temp = Vector3.Transform(v3, s);
                 var temp2 = Vector3.Transform(temp, t);
-                v3list.Add(Vector3.Transform(temp2, r));
+                var temp3 = Vector3.Transform(temp2, rz);
+                v3list.Add(Vector3.Transform(temp3, rx));
             }
 
             for (int i = 0; i < v3list.Count - 1; i++)
@@ -45,6 +50,47 @@ namespace NetsphereScnTool.Forms
         private void DrawMesh_FormClosed(object sender, FormClosedEventArgs e)
         {
             Dispose();
+        }
+
+        private void DrawMesh_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                    rotationx += 0.05f;
+                    break;
+
+                case Keys.Down:
+                    if (rotationx > 0.05f)
+                        rotationx -= 0.05f;
+                    break;
+
+                case Keys.Right:
+                    rotationz += 0.05f;
+                    break;
+
+                case Keys.Left:
+                    if (rotationz > 0.05f)
+                        rotationz -= 0.05f;
+                    break;
+            }
+
+            Refresh();
+        }
+
+        private void DrawMesh_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta < 0)
+                scale += 0.05f;
+            else
+            {
+                if (scale > 0.05f)
+                {
+                    scale -= 0.05f;
+                }
+            }
+
+            Refresh();
         }
     }
 }
