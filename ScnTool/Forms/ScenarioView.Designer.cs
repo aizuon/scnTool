@@ -46,20 +46,26 @@
             this.menu_delete_scene = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_extract_scene = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_import_scene = new System.Windows.Forms.ToolStripMenuItem();
-            this.menu_replace_scene = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menu_export_obj = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_import_obj = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_replace_model = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.editShaderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeTextureToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.status = new System.Windows.Forms.StatusStrip();
             this.lbl_status = new System.Windows.Forms.ToolStripStatusLabel();
             this.context_menu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.context_delete_scene = new System.Windows.Forms.ToolStripMenuItem();
             this.context_export_scene = new System.Windows.Forms.ToolStripMenuItem();
             this.context_import_scene = new System.Windows.Forms.ToolStripMenuItem();
-            this.replaceSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.context_export_model_obj = new System.Windows.Forms.ToolStripMenuItem();
             this.importOBJToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.replaceModelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.editShaderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeTextureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txt_find = new System.Windows.Forms.TextBox();
             this.lbl_search = new System.Windows.Forms.Label();
             this.data_view = new System.Windows.Forms.DataGridView();
@@ -67,6 +73,10 @@
             this.col_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_subname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.drawMeshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.drawMeshToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.status.SuspendLayout();
             this.context_menu.SuspendLayout();
@@ -168,10 +178,15 @@
             this.menu_delete_scene,
             this.menu_extract_scene,
             this.menu_import_scene,
-            this.menu_replace_scene,
-            this.toolStripSeparator1,
+            this.toolStripSeparator4,
             this.menu_export_obj,
-            this.menu_import_obj});
+            this.menu_import_obj,
+            this.menu_replace_model,
+            this.toolStripSeparator1,
+            this.editShaderToolStripMenuItem,
+            this.changeTextureToolStripMenuItem1,
+            this.toolStripSeparator7,
+            this.drawMeshToolStripMenuItem1});
             this.menu_edit.Enabled = false;
             this.menu_edit.Image = ((System.Drawing.Image)(resources.GetObject("menu_edit.Image")));
             this.menu_edit.Name = "menu_edit";
@@ -183,7 +198,7 @@
             this.menu_undo.Enabled = false;
             this.menu_undo.Image = ((System.Drawing.Image)(resources.GetObject("menu_undo.Image")));
             this.menu_undo.Name = "menu_undo";
-            this.menu_undo.Size = new System.Drawing.Size(201, 26);
+            this.menu_undo.Size = new System.Drawing.Size(197, 22);
             this.menu_undo.Text = "Undo (CTRL+Z)";
             this.menu_undo.Click += new System.EventHandler(this.menu_undo_Click);
             // 
@@ -192,20 +207,20 @@
             this.menu_redo.Enabled = false;
             this.menu_redo.Image = ((System.Drawing.Image)(resources.GetObject("menu_redo.Image")));
             this.menu_redo.Name = "menu_redo";
-            this.menu_redo.Size = new System.Drawing.Size(201, 26);
+            this.menu_redo.Size = new System.Drawing.Size(197, 22);
             this.menu_redo.Text = "Redo (CTRL+Y)";
             this.menu_redo.Click += new System.EventHandler(this.menu_redo_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(194, 6);
             // 
             // menu_delete_scene
             // 
             this.menu_delete_scene.Image = ((System.Drawing.Image)(resources.GetObject("menu_delete_scene.Image")));
             this.menu_delete_scene.Name = "menu_delete_scene";
-            this.menu_delete_scene.Size = new System.Drawing.Size(201, 26);
+            this.menu_delete_scene.Size = new System.Drawing.Size(197, 22);
             this.menu_delete_scene.Text = "Delete scene(s)";
             this.menu_delete_scene.Click += new System.EventHandler(this.menu_delete_scene_Click);
             // 
@@ -213,7 +228,7 @@
             // 
             this.menu_extract_scene.Image = ((System.Drawing.Image)(resources.GetObject("menu_extract_scene.Image")));
             this.menu_extract_scene.Name = "menu_extract_scene";
-            this.menu_extract_scene.Size = new System.Drawing.Size(201, 26);
+            this.menu_extract_scene.Size = new System.Drawing.Size(197, 22);
             this.menu_extract_scene.Text = "Export scene(s)";
             this.menu_extract_scene.Click += new System.EventHandler(this.menu_extract_scene_Click);
             // 
@@ -221,28 +236,20 @@
             // 
             this.menu_import_scene.Image = ((System.Drawing.Image)(resources.GetObject("menu_import_scene.Image")));
             this.menu_import_scene.Name = "menu_import_scene";
-            this.menu_import_scene.Size = new System.Drawing.Size(201, 26);
+            this.menu_import_scene.Size = new System.Drawing.Size(197, 22);
             this.menu_import_scene.Text = "Import scene(s)";
             this.menu_import_scene.Click += new System.EventHandler(this.menu_import_scene_Click);
             // 
-            // menu_replace_scene
+            // toolStripSeparator4
             // 
-            this.menu_replace_scene.Image = ((System.Drawing.Image)(resources.GetObject("menu_replace_scene.Image")));
-            this.menu_replace_scene.Name = "menu_replace_scene";
-            this.menu_replace_scene.Size = new System.Drawing.Size(201, 26);
-            this.menu_replace_scene.Text = "Replace scene";
-            this.menu_replace_scene.Click += new System.EventHandler(this.menu_replace_scene_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(194, 6);
             // 
             // menu_export_obj
             // 
             this.menu_export_obj.Image = ((System.Drawing.Image)(resources.GetObject("menu_export_obj.Image")));
             this.menu_export_obj.Name = "menu_export_obj";
-            this.menu_export_obj.Size = new System.Drawing.Size(201, 26);
+            this.menu_export_obj.Size = new System.Drawing.Size(197, 22);
             this.menu_export_obj.Text = "Export model(s) as OBJ";
             this.menu_export_obj.Click += new System.EventHandler(this.menu_export_obj_Click);
             // 
@@ -250,9 +257,38 @@
             // 
             this.menu_import_obj.Image = ((System.Drawing.Image)(resources.GetObject("menu_import_obj.Image")));
             this.menu_import_obj.Name = "menu_import_obj";
-            this.menu_import_obj.Size = new System.Drawing.Size(201, 26);
+            this.menu_import_obj.Size = new System.Drawing.Size(197, 22);
             this.menu_import_obj.Text = "Import OBJ(s) as model";
             this.menu_import_obj.Click += new System.EventHandler(this.menu_import_obj_Click);
+            // 
+            // menu_replace_model
+            // 
+            this.menu_replace_model.Image = ((System.Drawing.Image)(resources.GetObject("menu_replace_model.Image")));
+            this.menu_replace_model.Name = "menu_replace_model";
+            this.menu_replace_model.Size = new System.Drawing.Size(197, 22);
+            this.menu_replace_model.Text = "Replace model";
+            this.menu_replace_model.Click += new System.EventHandler(this.menu_replace_model_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(194, 6);
+            // 
+            // editShaderToolStripMenuItem
+            // 
+            this.editShaderToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editShaderToolStripMenuItem.Image")));
+            this.editShaderToolStripMenuItem.Name = "editShaderToolStripMenuItem";
+            this.editShaderToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.editShaderToolStripMenuItem.Text = "Edit shader";
+            this.editShaderToolStripMenuItem.Click += new System.EventHandler(this.EditShaderToolStripMenuItem_Click);
+            // 
+            // changeTextureToolStripMenuItem1
+            // 
+            this.changeTextureToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("changeTextureToolStripMenuItem1.Image")));
+            this.changeTextureToolStripMenuItem1.Name = "changeTextureToolStripMenuItem1";
+            this.changeTextureToolStripMenuItem1.Size = new System.Drawing.Size(197, 22);
+            this.changeTextureToolStripMenuItem1.Text = "Change texture";
+            this.changeTextureToolStripMenuItem1.Click += new System.EventHandler(this.ChangeTextureToolStripMenuItem1_Click);
             // 
             // status
             // 
@@ -284,12 +320,17 @@
             this.context_delete_scene,
             this.context_export_scene,
             this.context_import_scene,
-            this.replaceSceneToolStripMenuItem,
             this.toolStripSeparator3,
             this.context_export_model_obj,
-            this.importOBJToolStripMenuItem});
+            this.importOBJToolStripMenuItem,
+            this.replaceModelToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.editShaderToolStripMenuItem1,
+            this.changeTextureToolStripMenuItem,
+            this.toolStripSeparator6,
+            this.drawMeshToolStripMenuItem});
             this.context_menu.Name = "context_menu";
-            this.context_menu.Size = new System.Drawing.Size(199, 166);
+            this.context_menu.Size = new System.Drawing.Size(199, 256);
             // 
             // context_delete_scene
             // 
@@ -315,14 +356,6 @@
             this.context_import_scene.Text = "Import scene(s)";
             this.context_import_scene.Click += new System.EventHandler(this.context_import_scene_Click);
             // 
-            // replaceSceneToolStripMenuItem
-            // 
-            this.replaceSceneToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("replaceSceneToolStripMenuItem.Image")));
-            this.replaceSceneToolStripMenuItem.Name = "replaceSceneToolStripMenuItem";
-            this.replaceSceneToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-            this.replaceSceneToolStripMenuItem.Text = "Replace scene";
-            this.replaceSceneToolStripMenuItem.Click += new System.EventHandler(this.ReplaceSceneToolStripMenuItem_Click);
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -343,6 +376,35 @@
             this.importOBJToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.importOBJToolStripMenuItem.Text = "Import OBJ as model";
             this.importOBJToolStripMenuItem.Click += new System.EventHandler(this.ImportOBJToolStripMenuItem_Click);
+            // 
+            // replaceModelToolStripMenuItem
+            // 
+            this.replaceModelToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("replaceModelToolStripMenuItem.Image")));
+            this.replaceModelToolStripMenuItem.Name = "replaceModelToolStripMenuItem";
+            this.replaceModelToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
+            this.replaceModelToolStripMenuItem.Text = "Replace model";
+            this.replaceModelToolStripMenuItem.Click += new System.EventHandler(this.replaceModelToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(195, 6);
+            // 
+            // editShaderToolStripMenuItem1
+            // 
+            this.editShaderToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("editShaderToolStripMenuItem1.Image")));
+            this.editShaderToolStripMenuItem1.Name = "editShaderToolStripMenuItem1";
+            this.editShaderToolStripMenuItem1.Size = new System.Drawing.Size(198, 26);
+            this.editShaderToolStripMenuItem1.Text = "Edit shader";
+            this.editShaderToolStripMenuItem1.Click += new System.EventHandler(this.EditShaderToolStripMenuItem1_Click);
+            // 
+            // changeTextureToolStripMenuItem
+            // 
+            this.changeTextureToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("changeTextureToolStripMenuItem.Image")));
+            this.changeTextureToolStripMenuItem.Name = "changeTextureToolStripMenuItem";
+            this.changeTextureToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
+            this.changeTextureToolStripMenuItem.Text = "Change texture";
+            this.changeTextureToolStripMenuItem.Click += new System.EventHandler(this.ChangeTextureToolStripMenuItem_Click);
             // 
             // txt_find
             // 
@@ -434,6 +496,32 @@
             this.col_type.ReadOnly = true;
             this.col_type.Width = 247;
             // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(195, 6);
+            // 
+            // drawMeshToolStripMenuItem
+            // 
+            this.drawMeshToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("drawMeshToolStripMenuItem.Image")));
+            this.drawMeshToolStripMenuItem.Name = "drawMeshToolStripMenuItem";
+            this.drawMeshToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
+            this.drawMeshToolStripMenuItem.Text = "Draw mesh";
+            this.drawMeshToolStripMenuItem.Click += new System.EventHandler(this.DrawMeshToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(198, 6);
+            // 
+            // drawMeshToolStripMenuItem1
+            // 
+            this.drawMeshToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("drawMeshToolStripMenuItem1.Image")));
+            this.drawMeshToolStripMenuItem1.Name = "drawMeshToolStripMenuItem1";
+            this.drawMeshToolStripMenuItem1.Size = new System.Drawing.Size(201, 26);
+            this.drawMeshToolStripMenuItem1.Text = "Draw mesh";
+            this.drawMeshToolStripMenuItem1.Click += new System.EventHandler(this.DrawMeshToolStripMenuItem1_Click);
+            // 
             // ScenarioView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -503,8 +591,18 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn col_type;
         private System.Windows.Forms.ToolStripMenuItem importOBJToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menu_import_obj;
-        private System.Windows.Forms.ToolStripMenuItem replaceSceneToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem menu_replace_scene;
+        private System.Windows.Forms.ToolStripMenuItem replaceModelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menu_replace_model;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem editShaderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem editShaderToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem changeTextureToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem changeTextureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem drawMeshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem drawMeshToolStripMenuItem1;
     }
 }
 

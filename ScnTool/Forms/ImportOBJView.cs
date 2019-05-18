@@ -15,12 +15,8 @@ namespace NetsphereScnTool.Forms
         public ImportOBJView(TaskCompletionSource<bool> tcs)
         {
             InitializeComponent();
+
             _tcs = tcs;
-        }
-
-        private void ImportOBJView_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void SetNames_Click(object sender, EventArgs e)

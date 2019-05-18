@@ -127,18 +127,18 @@ namespace NetsphereScnTool.Forms
 
             if (file.ShowDialog() == DialogResult.OK)
             {
-                var tcs = new TaskCompletionSource<bool>();
-                var importView = new ImportOBJView(tcs);
                 new Task(() =>
                 {
+                    var tcs = new TaskCompletionSource<bool>();
+                    var importView = new ImportOBJView(tcs);
                     importView.ShowDialog();
+                    tcs.Task.GetAwaiter().GetResult();
+
+                    var importer = new Obj_Importer();
+
+                    importer.Import(file.FileName, importView.TextureName, importView.SceneName, importView.SceneSubname, container);
+                    importView.Dispose();
                 }).Start();
-                tcs.Task.GetAwaiter().GetResult();
-
-                var importer = new Obj_Importer();
-
-                importer.Import(file.FileName, importView.TextureName, importView.SceneName, importView.SceneSubname, container);
-                importView.Dispose();
 
                 return true;
             }
@@ -146,7 +146,7 @@ namespace NetsphereScnTool.Forms
             return false;
         }
 
-        private bool f_replace_scene(int index)
+        private bool f_replace_model(int index)
         {
             if (container == null)
                 return false;
@@ -167,6 +167,81 @@ namespace NetsphereScnTool.Forms
             }
 
             return false;
+        }
+
+        private bool f_edit_shader(int index)
+        {
+            if (container == null)
+                return false;
+
+            var name = container.ElementAt(index).Name;
+            var scene = container.FirstOrDefault(x => x.Name == name);
+
+            var model = scene as ModelChunk;
+
+            new Task(() =>
+            {
+                var tcs = new TaskCompletionSource<bool>();
+                var shadereditView = new ShaderEditView(model.RenderState, tcs);
+                shadereditView.ShowDialog();
+                tcs.Task.GetAwaiter().GetResult();
+
+                var editor = new Obj_Editor();
+
+                editor.EditShader(scene as ModelChunk, shadereditView.selectedShader);
+                shadereditView.Dispose();
+            }).Start();
+
+            return true;
+        }
+
+        private bool f_change_texture(int index)
+        {
+            if (container == null)
+                return false;
+
+            var name = container.ElementAt(index).Name;
+            var scene = container.FirstOrDefault(x => x.Name == name);
+
+            var model = scene as ModelChunk;
+
+            var txts = new List<string>();
+
+            foreach (var tds in model.TextureData.Textures)
+                txts.Add(tds.FileName);
+
+            new Task(() =>
+            {
+                var tcs = new TaskCompletionSource<bool>();
+                var texturechangeView = new TextureChangeView(txts, tcs);
+                texturechangeView.ShowDialog();
+                tcs.Task.GetAwaiter().GetResult();
+
+                var editor = new Obj_Editor();
+
+                editor.ChangeTexture(scene as ModelChunk, texturechangeView.Textures);
+                texturechangeView.Dispose();
+            }).Start();
+
+            return true;
+        }
+
+        private void f_draw_mesh(int index)
+        {
+            if (container == null)
+                return;
+
+            var name = container.ElementAt(index).Name;
+            var scene = container.FirstOrDefault(x => x.Name == name);
+
+            var model = scene as ModelChunk;
+
+            new Task(() =>
+            {
+                var drawMesh = new DrawMesh(model.Mesh);
+
+                drawMesh.ShowDialog();
+            }).Start();
         }
 
         private bool f_extract_obj(IEnumerable<SceneChunk> scenes)
@@ -556,13 +631,13 @@ namespace NetsphereScnTool.Forms
                 MessageBox.Show("Unable to import scene(s)", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void replace_scene()
+        private void replace_model()
         {
             if (container == null)
                 return;
 
             bool result = false;
-            result = f_replace_scene(data_view.SelectedRows[0].Index);
+            result = f_replace_model(data_view.SelectedRows[0].Index);
 
             if (result)
             {
@@ -573,6 +648,57 @@ namespace NetsphereScnTool.Forms
             }
             else
                 MessageBox.Show("Unable to replace scene", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void edit_shader()
+        {
+            if (container == null)
+                return;
+
+            bool result = false;
+            result = f_edit_shader(data_view.SelectedRows[0].Index);
+
+            if (result)
+            {
+                update_view();
+                update_status();
+
+                undo_manager.Save(container);
+            }
+            else
+                MessageBox.Show("Unable to change shader", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void change_texture()
+        {
+            if (container == null)
+                return;
+
+            bool result = false;
+            result = f_change_texture(data_view.SelectedRows[0].Index);
+
+            if (result)
+            {
+                update_view();
+                update_status();
+
+                undo_manager.Save(container);
+            }
+            else
+                MessageBox.Show("Unable to change texture", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void draw_mesh()
+        {
+            if (container == null)
+                return;
+
+            f_draw_mesh(data_view.SelectedRows[0].Index);
+
+            update_view();
+            update_status();
+
+            undo_manager.Save(container);
         }
 
         private void import_obj()
@@ -781,10 +907,22 @@ namespace NetsphereScnTool.Forms
 
         private void ImportOBJToolStripMenuItem_Click(object sender, EventArgs e) => import_obj();
 
-        private void ReplaceSceneToolStripMenuItem_Click(object sender, EventArgs e) => replace_scene();
+        private void replaceModelToolStripMenuItem_Click(object sender, EventArgs e) => replace_model();
 
         private void menu_import_obj_Click(object sender, EventArgs e) => import_obj();
 
-        private void menu_replace_scene_Click(object sender, EventArgs e) => replace_scene();
+        private void menu_replace_model_Click(object sender, EventArgs e) => replace_model();
+
+        private void EditShaderToolStripMenuItem1_Click(object sender, EventArgs e) => edit_shader();
+
+        private void EditShaderToolStripMenuItem_Click(object sender, EventArgs e) => edit_shader();
+
+        private void ChangeTextureToolStripMenuItem_Click(object sender, EventArgs e) => change_texture();
+
+        private void ChangeTextureToolStripMenuItem1_Click(object sender, EventArgs e) => change_texture();
+
+        private void DrawMeshToolStripMenuItem_Click(object sender, EventArgs e) => draw_mesh();
+
+        private void DrawMeshToolStripMenuItem1_Click(object sender, EventArgs e) => draw_mesh();
     }
 }

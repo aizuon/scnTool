@@ -74,6 +74,12 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Forms\DrawMesh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DrawMesh.Designer.cs">
+      <DependentUpon>DrawMesh.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ImportOBJView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,18 @@
     </Compile>
     <Compile Include="Forms\ScenarioView.Designer.cs">
       <DependentUpon>ScenarioView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ShaderEditView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ShaderEditView.Designer.cs">
+      <DependentUpon>ShaderEditView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TextureChangeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TextureChangeView.Designer.cs">
+      <DependentUpon>TextureChangeView.cs</DependentUpon>
     </Compile>
     <Compile Include="ObjClass\Extent.cs" />
     <Compile Include="ObjClass\Mtl.cs" />
@@ -110,14 +128,25 @@
     <Compile Include="Scene\SceneContainer.cs" />
     <Compile Include="UndoRedo\SceneUndoManager.cs" />
     <Compile Include="UndoRedo\UndoSystem.cs" />
+    <Compile Include="Utility\Obj_Editor.cs" />
     <Compile Include="Utility\Obj_Exporter.cs" />
     <Compile Include="Utility\Obj_Importer.cs" />
     <Compile Include="Utility\SortableBindingList.cs" />
+    <EmbeddedResource Include="Forms\DrawMesh.resx">
+      <DependentUpon>DrawMesh.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ImportOBJView.resx">
       <DependentUpon>ImportOBJView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ScenarioView.resx">
       <DependentUpon>ScenarioView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ShaderEditView.resx">
+      <DependentUpon>ShaderEditView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TextureChangeView.resx">
+      <DependentUpon>TextureChangeView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

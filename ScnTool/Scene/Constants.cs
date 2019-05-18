@@ -7,18 +7,18 @@ namespace NetsphereScnTool.Scene
     {
         None = 0,
         NoLight = 1,
-        AlphaBlend1 = 2,
-        AlphaTest = 4,
-        NoCull = 8,
-        MoveWithMouse = 16,
-        AlphaBlend2 = 32,
-        NoDepthWrite = 64,
+        Transparent = 2,
+        Cutout = 4,
+        NoCulling = 8,
+        Billboard = 16,
+        Flare = 32,
+        ZWriteOff = 64,
         Shader = 128,
         NoFog = 512,
         NoMipmap = 2048,
         Shadow = 8192,
         Water = 32768,
-        MotBlur = 65536,
+        Distortion = 65536,
         Dark = 131072
     }
 
