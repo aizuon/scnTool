@@ -12,38 +12,39 @@ namespace NetsphereScnTool.Forms
         private float rotationx = 1.00f;
         private float rotationz = 0.00f;
         private float scale = 0.05f;
+        private Vector3 trans = new Vector3(-50, -170, 0);
 
         public DrawMesh(MeshData mesh)
         {
             InitializeComponent();
+            DoubleBuffered = true;
 
             _mesh = mesh;
         }
 
         private void DrawMesh_Paint(object sender, PaintEventArgs e)
         {
-            var g = e.Graphics;
             float centerX = ClientSize.Width / 2.0f;
             float centerY = ClientSize.Height / 2.0f;
 
-            var rx = Matrix4x4.CreateRotationX(rotationx);
-            var rz = Matrix4x4.CreateRotationZ(rotationz);
-            var s = Matrix4x4.CreateScale(scale);
-            var t = Matrix4x4.CreateTranslation(-50, -170, 0);
+            var transform = Matrix4x4.CreateTranslation(trans)
+                * Matrix4x4.CreateScale(scale)
+                * Matrix4x4.CreateRotationX(rotationx)
+                * Matrix4x4.CreateRotationZ(rotationz);
 
             var v3list = new List<Vector3>();
 
             foreach (var v3 in _mesh.Vertices)
-            {
-                var temp = Vector3.Transform(v3, s);
-                var temp2 = Vector3.Transform(temp, t);
-                var temp3 = Vector3.Transform(temp2, rz);
-                v3list.Add(Vector3.Transform(temp3, rx));
-            }
+                v3list.Add(Vector3.Transform(v3, transform));
 
-            for (int i = 0; i < v3list.Count - 1; i++)
+            for (int i = 0; i < _mesh.Faces.Count; i++)
             {
-                g.DrawLine(new Pen(Color.White), new PointF(v3list[i].X + centerX, v3list[i].Y + centerY), new PointF(v3list[i + 1].X + centerX, v3list[i + 1].Y + centerY));
+                var p1 = new PointF(v3list[(int)_mesh.Faces[i].X].X + centerX, v3list[(int)_mesh.Faces[i].X].Y + centerY);
+                var p2 = new PointF(v3list[(int)_mesh.Faces[i].Y].X + centerX, v3list[(int)_mesh.Faces[i].Y].Y + centerY);
+                var p3 = new PointF(v3list[(int)_mesh.Faces[i].Z].X + centerX, v3list[(int)_mesh.Faces[i].Z].Y + centerY);
+                e.Graphics.DrawLine(Pens.White, p1, p2);
+                e.Graphics.DrawLine(Pens.White, p2, p3);
+                e.Graphics.DrawLine(Pens.White, p1, p3);
             }
         }
 
@@ -57,21 +58,35 @@ namespace NetsphereScnTool.Forms
             switch (e.KeyCode)
             {
                 case Keys.Up:
-                    rotationx += 0.05f;
+                    rotationx += 0.1f;
                     break;
 
                 case Keys.Down:
-                    if (rotationx > 0.05f)
-                        rotationx -= 0.05f;
+                    rotationx -= 0.1f;
                     break;
 
                 case Keys.Right:
-                    rotationz += 0.05f;
+                    rotationz += 0.1f;
                     break;
 
                 case Keys.Left:
-                    if (rotationz > 0.05f)
-                        rotationz -= 0.05f;
+                    rotationz -= 0.1f;
+                    break;
+
+                case Keys.W:
+                    trans.Y -= 10;
+                    break;
+
+                case Keys.S:
+                    trans.Y += 10;
+                    break;
+
+                case Keys.A:
+                    trans.X -= 10;
+                    break;
+
+                case Keys.D:
+                    trans.X += 10;
                     break;
             }
 
@@ -80,7 +95,7 @@ namespace NetsphereScnTool.Forms
 
         private void DrawMesh_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (e.Delta < 0)
+            if (e.Delta > 0)
                 scale += 0.05f;
             else
             {
