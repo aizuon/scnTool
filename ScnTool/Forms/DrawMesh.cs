@@ -77,15 +77,6 @@ namespace NetsphereScnTool.Forms
             foreach (var v3 in _mesh.Vertices)
                 v3list.Add(Vector3.Transform(v3, transform));
 
-            float maxZ = 0;
-            foreach (var v in v3list)
-            {
-                var absZ = Math.Abs(v.Z);
-
-                if (absZ > maxZ)
-                    maxZ = absZ;
-            }
-
             for (int i = 0; i < _mesh.Faces.Count; i++)
             {
                 var p1 = new PointF(v3list[(int)_mesh.Faces[i].X].X + centerX, v3list[(int)_mesh.Faces[i].X].Y + centerY);
@@ -98,6 +89,15 @@ namespace NetsphereScnTool.Forms
                     {
                         if (Light == true)
                         {
+                            float maxZ = 0;
+                            foreach (var v in v3list)
+                            {
+                                var absZ = Math.Abs(v.Z);
+
+                                if (absZ > maxZ)
+                                    maxZ = absZ;
+                            }
+
                             var grayscale = (int)(Math.Abs((v3list[(int)_mesh.Faces[i].X].Z + v3list[(int)_mesh.Faces[i].Y].Z + v3list[(int)_mesh.Faces[i].Z].Z) / 3) * 255 / maxZ);
 
                             e.Graphics.FillPolygon(new SolidBrush(Color.FromArgb(grayscale, grayscale, grayscale)), new PointF[] { p1, p2, p3 });
