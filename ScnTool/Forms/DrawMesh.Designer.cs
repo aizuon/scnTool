@@ -44,6 +44,7 @@
             this.Name = "DrawMesh";
             this.Text = "DrawMesh";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DrawMesh_FormClosed);
+            this.ClientSizeChanged += new System.EventHandler(this.DrawMesh_ClientSizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawMesh_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DrawMesh_KeyDown);
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.DrawMesh_MouseWheel);

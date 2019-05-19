@@ -197,7 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlubLib\BlubLib.csproj">
-      <Project>{F42D1C22-3616-4FD2-8F8A-3B4826B37894}</Project>
+      <Project>{f42d1c22-3616-4fd2-8f8a-3b4826b37894}</Project>
       <Name>BlubLib</Name>
     </ProjectReference>
   </ItemGroup>

@@ -151,7 +151,7 @@ namespace NetsphereScnTool.Forms
             if (container == null)
                 return false;
 
-            var name = container.ElementAt(index).Name;
+            string name = container.ElementAt(index).Name;
             var scene = container.FirstOrDefault(x => x.Name == name);
 
             var file = new OpenFileDialog();
@@ -174,7 +174,7 @@ namespace NetsphereScnTool.Forms
             if (container == null)
                 return false;
 
-            var name = container.ElementAt(index).Name;
+            string name = container.ElementAt(index).Name;
             var scene = container.FirstOrDefault(x => x.Name == name);
 
             var model = scene as ModelChunk;
@@ -200,7 +200,7 @@ namespace NetsphereScnTool.Forms
             if (container == null)
                 return false;
 
-            var name = container.ElementAt(index).Name;
+            string name = container.ElementAt(index).Name;
             var scene = container.FirstOrDefault(x => x.Name == name);
 
             var model = scene as ModelChunk;
@@ -231,7 +231,7 @@ namespace NetsphereScnTool.Forms
             if (container == null)
                 return;
 
-            var name = container.ElementAt(index).Name;
+            string name = container.ElementAt(index).Name;
             var scene = container.FirstOrDefault(x => x.Name == name);
 
             var model = scene as ModelChunk;
