@@ -87,6 +87,8 @@ namespace NetsphereScnTool.Forms
                 {
                     if (IsClockwise(p1, p2, p3))
                     {
+                        var polygon = new PointF[] { p1, p2, p3 };
+
                         if (Light == true)
                         {
                             float maxZ = 0;
@@ -100,11 +102,11 @@ namespace NetsphereScnTool.Forms
 
                             var grayscale = (int)(Math.Abs((v3list[(int)_mesh.Faces[i].X].Z + v3list[(int)_mesh.Faces[i].Y].Z + v3list[(int)_mesh.Faces[i].Z].Z) / 3) * 255 / maxZ);
 
-                            e.Graphics.FillPolygon(new SolidBrush(Color.FromArgb(grayscale, grayscale, grayscale)), new PointF[] { p1, p2, p3 });
+                            e.Graphics.FillPolygon(new SolidBrush(Color.FromArgb(grayscale, grayscale, grayscale)), polygon);
                         }
 
                         else
-                            e.Graphics.FillPolygon(Brushes.White, new PointF[] { p1, p2, p3 });
+                            e.Graphics.FillPolygon(Brushes.White, polygon);
                     }
                 }
 

@@ -53,6 +53,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.editShaderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeTextureToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.drawMeshToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.status = new System.Windows.Forms.StatusStrip();
             this.lbl_status = new System.Windows.Forms.ToolStripStatusLabel();
             this.context_menu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -66,6 +68,8 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.editShaderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.changeTextureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.drawMeshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txt_find = new System.Windows.Forms.TextBox();
             this.lbl_search = new System.Windows.Forms.Label();
             this.data_view = new System.Windows.Forms.DataGridView();
@@ -73,10 +77,8 @@
             this.col_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_subname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.drawMeshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.drawMeshToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.editAnimationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editAnimationToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.status.SuspendLayout();
             this.context_menu.SuspendLayout();
@@ -185,6 +187,7 @@
             this.toolStripSeparator1,
             this.editShaderToolStripMenuItem,
             this.changeTextureToolStripMenuItem1,
+            this.editAnimationToolStripMenuItem1,
             this.toolStripSeparator7,
             this.drawMeshToolStripMenuItem1});
             this.menu_edit.Enabled = false;
@@ -198,7 +201,7 @@
             this.menu_undo.Enabled = false;
             this.menu_undo.Image = ((System.Drawing.Image)(resources.GetObject("menu_undo.Image")));
             this.menu_undo.Name = "menu_undo";
-            this.menu_undo.Size = new System.Drawing.Size(197, 22);
+            this.menu_undo.Size = new System.Drawing.Size(201, 26);
             this.menu_undo.Text = "Undo (CTRL+Z)";
             this.menu_undo.Click += new System.EventHandler(this.menu_undo_Click);
             // 
@@ -207,20 +210,20 @@
             this.menu_redo.Enabled = false;
             this.menu_redo.Image = ((System.Drawing.Image)(resources.GetObject("menu_redo.Image")));
             this.menu_redo.Name = "menu_redo";
-            this.menu_redo.Size = new System.Drawing.Size(197, 22);
+            this.menu_redo.Size = new System.Drawing.Size(201, 26);
             this.menu_redo.Text = "Redo (CTRL+Y)";
             this.menu_redo.Click += new System.EventHandler(this.menu_redo_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(194, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(198, 6);
             // 
             // menu_delete_scene
             // 
             this.menu_delete_scene.Image = ((System.Drawing.Image)(resources.GetObject("menu_delete_scene.Image")));
             this.menu_delete_scene.Name = "menu_delete_scene";
-            this.menu_delete_scene.Size = new System.Drawing.Size(197, 22);
+            this.menu_delete_scene.Size = new System.Drawing.Size(201, 26);
             this.menu_delete_scene.Text = "Delete scene(s)";
             this.menu_delete_scene.Click += new System.EventHandler(this.menu_delete_scene_Click);
             // 
@@ -228,7 +231,7 @@
             // 
             this.menu_extract_scene.Image = ((System.Drawing.Image)(resources.GetObject("menu_extract_scene.Image")));
             this.menu_extract_scene.Name = "menu_extract_scene";
-            this.menu_extract_scene.Size = new System.Drawing.Size(197, 22);
+            this.menu_extract_scene.Size = new System.Drawing.Size(201, 26);
             this.menu_extract_scene.Text = "Export scene(s)";
             this.menu_extract_scene.Click += new System.EventHandler(this.menu_extract_scene_Click);
             // 
@@ -236,20 +239,20 @@
             // 
             this.menu_import_scene.Image = ((System.Drawing.Image)(resources.GetObject("menu_import_scene.Image")));
             this.menu_import_scene.Name = "menu_import_scene";
-            this.menu_import_scene.Size = new System.Drawing.Size(197, 22);
+            this.menu_import_scene.Size = new System.Drawing.Size(201, 26);
             this.menu_import_scene.Text = "Import scene(s)";
             this.menu_import_scene.Click += new System.EventHandler(this.menu_import_scene_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(194, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(198, 6);
             // 
             // menu_export_obj
             // 
             this.menu_export_obj.Image = ((System.Drawing.Image)(resources.GetObject("menu_export_obj.Image")));
             this.menu_export_obj.Name = "menu_export_obj";
-            this.menu_export_obj.Size = new System.Drawing.Size(197, 22);
+            this.menu_export_obj.Size = new System.Drawing.Size(201, 26);
             this.menu_export_obj.Text = "Export model(s) as OBJ";
             this.menu_export_obj.Click += new System.EventHandler(this.menu_export_obj_Click);
             // 
@@ -257,7 +260,7 @@
             // 
             this.menu_import_obj.Image = ((System.Drawing.Image)(resources.GetObject("menu_import_obj.Image")));
             this.menu_import_obj.Name = "menu_import_obj";
-            this.menu_import_obj.Size = new System.Drawing.Size(197, 22);
+            this.menu_import_obj.Size = new System.Drawing.Size(201, 26);
             this.menu_import_obj.Text = "Import OBJ(s) as model";
             this.menu_import_obj.Click += new System.EventHandler(this.menu_import_obj_Click);
             // 
@@ -265,20 +268,20 @@
             // 
             this.menu_replace_model.Image = ((System.Drawing.Image)(resources.GetObject("menu_replace_model.Image")));
             this.menu_replace_model.Name = "menu_replace_model";
-            this.menu_replace_model.Size = new System.Drawing.Size(197, 22);
+            this.menu_replace_model.Size = new System.Drawing.Size(201, 26);
             this.menu_replace_model.Text = "Replace model";
             this.menu_replace_model.Click += new System.EventHandler(this.menu_replace_model_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(194, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
             // 
             // editShaderToolStripMenuItem
             // 
             this.editShaderToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editShaderToolStripMenuItem.Image")));
             this.editShaderToolStripMenuItem.Name = "editShaderToolStripMenuItem";
-            this.editShaderToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.editShaderToolStripMenuItem.Size = new System.Drawing.Size(201, 26);
             this.editShaderToolStripMenuItem.Text = "Edit shader";
             this.editShaderToolStripMenuItem.Click += new System.EventHandler(this.EditShaderToolStripMenuItem_Click);
             // 
@@ -286,9 +289,22 @@
             // 
             this.changeTextureToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("changeTextureToolStripMenuItem1.Image")));
             this.changeTextureToolStripMenuItem1.Name = "changeTextureToolStripMenuItem1";
-            this.changeTextureToolStripMenuItem1.Size = new System.Drawing.Size(197, 22);
+            this.changeTextureToolStripMenuItem1.Size = new System.Drawing.Size(201, 26);
             this.changeTextureToolStripMenuItem1.Text = "Change texture";
             this.changeTextureToolStripMenuItem1.Click += new System.EventHandler(this.ChangeTextureToolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(198, 6);
+            // 
+            // drawMeshToolStripMenuItem1
+            // 
+            this.drawMeshToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("drawMeshToolStripMenuItem1.Image")));
+            this.drawMeshToolStripMenuItem1.Name = "drawMeshToolStripMenuItem1";
+            this.drawMeshToolStripMenuItem1.Size = new System.Drawing.Size(201, 26);
+            this.drawMeshToolStripMenuItem1.Text = "Draw mesh";
+            this.drawMeshToolStripMenuItem1.Click += new System.EventHandler(this.DrawMeshToolStripMenuItem1_Click);
             // 
             // status
             // 
@@ -327,10 +343,11 @@
             this.toolStripSeparator5,
             this.editShaderToolStripMenuItem1,
             this.changeTextureToolStripMenuItem,
+            this.editAnimationToolStripMenuItem,
             this.toolStripSeparator6,
             this.drawMeshToolStripMenuItem});
             this.context_menu.Name = "context_menu";
-            this.context_menu.Size = new System.Drawing.Size(199, 256);
+            this.context_menu.Size = new System.Drawing.Size(199, 304);
             // 
             // context_delete_scene
             // 
@@ -405,6 +422,19 @@
             this.changeTextureToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.changeTextureToolStripMenuItem.Text = "Change texture";
             this.changeTextureToolStripMenuItem.Click += new System.EventHandler(this.ChangeTextureToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(195, 6);
+            // 
+            // drawMeshToolStripMenuItem
+            // 
+            this.drawMeshToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("drawMeshToolStripMenuItem.Image")));
+            this.drawMeshToolStripMenuItem.Name = "drawMeshToolStripMenuItem";
+            this.drawMeshToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
+            this.drawMeshToolStripMenuItem.Text = "Draw mesh";
+            this.drawMeshToolStripMenuItem.Click += new System.EventHandler(this.DrawMeshToolStripMenuItem_Click);
             // 
             // txt_find
             // 
@@ -496,31 +526,21 @@
             this.col_type.ReadOnly = true;
             this.col_type.Width = 247;
             // 
-            // toolStripSeparator6
+            // editAnimationToolStripMenuItem
             // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(195, 6);
+            this.editAnimationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editAnimationToolStripMenuItem.Image")));
+            this.editAnimationToolStripMenuItem.Name = "editAnimationToolStripMenuItem";
+            this.editAnimationToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
+            this.editAnimationToolStripMenuItem.Text = "Edit animation";
+            this.editAnimationToolStripMenuItem.Click += new System.EventHandler(this.EditAnimationToolStripMenuItem_Click);
             // 
-            // drawMeshToolStripMenuItem
+            // editAnimationToolStripMenuItem1
             // 
-            this.drawMeshToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("drawMeshToolStripMenuItem.Image")));
-            this.drawMeshToolStripMenuItem.Name = "drawMeshToolStripMenuItem";
-            this.drawMeshToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-            this.drawMeshToolStripMenuItem.Text = "Draw mesh";
-            this.drawMeshToolStripMenuItem.Click += new System.EventHandler(this.DrawMeshToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(198, 6);
-            // 
-            // drawMeshToolStripMenuItem1
-            // 
-            this.drawMeshToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("drawMeshToolStripMenuItem1.Image")));
-            this.drawMeshToolStripMenuItem1.Name = "drawMeshToolStripMenuItem1";
-            this.drawMeshToolStripMenuItem1.Size = new System.Drawing.Size(201, 26);
-            this.drawMeshToolStripMenuItem1.Text = "Draw mesh";
-            this.drawMeshToolStripMenuItem1.Click += new System.EventHandler(this.DrawMeshToolStripMenuItem1_Click);
+            this.editAnimationToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("editAnimationToolStripMenuItem1.Image")));
+            this.editAnimationToolStripMenuItem1.Name = "editAnimationToolStripMenuItem1";
+            this.editAnimationToolStripMenuItem1.Size = new System.Drawing.Size(201, 26);
+            this.editAnimationToolStripMenuItem1.Text = "Edit animation";
+            this.editAnimationToolStripMenuItem1.Click += new System.EventHandler(this.EditAnimationToolStripMenuItem1_Click);
             // 
             // ScenarioView
             // 
@@ -603,6 +623,8 @@
         private System.Windows.Forms.ToolStripMenuItem drawMeshToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem drawMeshToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem editAnimationToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem editAnimationToolStripMenuItem;
     }
 }
 

@@ -52,6 +52,10 @@
     <ApplicationIcon>new_logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BlubLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\BlubLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
@@ -74,6 +78,12 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Forms\AnimationEditView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AnimationEditView.Designer.cs">
+      <DependentUpon>AnimationEditView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DrawMesh.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +142,9 @@
     <Compile Include="Utility\Obj_Exporter.cs" />
     <Compile Include="Utility\Obj_Importer.cs" />
     <Compile Include="Utility\SortableBindingList.cs" />
+    <EmbeddedResource Include="Forms\AnimationEditView.resx">
+      <DependentUpon>AnimationEditView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DrawMesh.resx">
       <DependentUpon>DrawMesh.cs</DependentUpon>
     </EmbeddedResource>
@@ -194,12 +207,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BlubLib\BlubLib.csproj">
-      <Project>{f42d1c22-3616-4fd2-8f8a-3b4826b37894}</Project>
-      <Name>BlubLib</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

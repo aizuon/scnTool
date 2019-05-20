@@ -188,7 +188,7 @@ namespace NetsphereScnTool.Forms
 
                 var editor = new Obj_Editor();
 
-                editor.EditShader(scene as ModelChunk, shadereditView.selectedShader);
+                editor.EditShader(model, shadereditView.selectedShader);
                 shadereditView.Dispose();
             }).Start();
 
@@ -219,8 +219,34 @@ namespace NetsphereScnTool.Forms
 
                 var editor = new Obj_Editor();
 
-                editor.ChangeTexture(scene as ModelChunk, texturechangeView.Textures);
+                editor.ChangeTexture(model, texturechangeView.Textures);
                 texturechangeView.Dispose();
+            }).Start();
+
+            return true;
+        }
+
+        private bool f_edit_animation(int index)
+        {
+            if (container == null)
+                return false;
+
+            string name = container.ElementAt(index).Name;
+            var scene = container.FirstOrDefault(x => x.Name == name);
+
+            var model = scene as ModelChunk;
+
+            new Task(() =>
+            {
+                var tcs = new TaskCompletionSource<bool>();
+                var animationeditView = new AnimationEditView(model.Animation, tcs);
+                animationeditView.ShowDialog();
+                tcs.Task.GetAwaiter().GetResult();
+
+                var editor = new Obj_Editor();
+
+                editor.EditAnimation(model, animationeditView.Animation);
+                animationeditView.Dispose();
             }).Start();
 
             return true;
@@ -688,6 +714,25 @@ namespace NetsphereScnTool.Forms
                 MessageBox.Show("Unable to change texture", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        private void edit_animation()
+        {
+            if (container == null)
+                return;
+
+            bool result = false;
+            result = f_edit_animation(data_view.SelectedRows[0].Index);
+
+            if (result)
+            {
+                update_view();
+                update_status();
+
+                undo_manager.Save(container);
+            }
+            else
+                MessageBox.Show("Unable to change animation", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         private void draw_mesh()
         {
             if (container == null)
@@ -924,5 +969,9 @@ namespace NetsphereScnTool.Forms
         private void DrawMeshToolStripMenuItem_Click(object sender, EventArgs e) => draw_mesh();
 
         private void DrawMeshToolStripMenuItem1_Click(object sender, EventArgs e) => draw_mesh();
+
+        private void EditAnimationToolStripMenuItem1_Click(object sender, EventArgs e) => edit_animation();
+
+        private void EditAnimationToolStripMenuItem_Click(object sender, EventArgs e) => edit_animation();
     }
 }

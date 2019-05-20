@@ -2,6 +2,8 @@
 using NetsphereScnTool.Scene.Chunks;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace NetsphereScnTool.Utility
 {
@@ -30,6 +32,11 @@ namespace NetsphereScnTool.Utility
             }
 
             model.TextureData.Textures = txt;
+        }
+
+        public void EditAnimation(ModelChunk model, IDictionary<string, TransformKeyData2> animation)
+        {
+            model.Animation = animation;
         }
     }
 }
