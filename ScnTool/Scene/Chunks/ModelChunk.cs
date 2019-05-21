@@ -10,24 +10,20 @@ namespace NetsphereScnTool.Scene.Chunks
     {
         public override ChunkType ChunkType => ChunkType.ModelData;
 
-        public float Unk2 { get; set; }
-        public RenderState RenderState { get; set; }
+        public Shader Shader { get; set; }
         public TextureData TextureData { get; set; }
         public MeshData Mesh { get; set; }
-        public IList<WeightData> WeightData { get; set; }
-        public IDictionary<string, TransformKeyData2> Animation { get; set; }
+        public IList<WeightBone> WeightBone { get; set; }
+        public IList<ModelAnimation> Animation { get; set; }
 
         public ModelChunk(SceneContainer container)
             : base(container)
         {
-            Unk1 = 0.1f;
-            Matrix = Matrix4x4.Identity;
-            Unk2 = 0.1f;
-            RenderState = RenderState.None;
+            Shader = Shader.None;
             TextureData = new TextureData(this);
             Mesh = new MeshData(this);
-            WeightData = new List<WeightData>();
-            Animation = new Dictionary<string, TransformKeyData2>();
+            WeightBone = new List<WeightBone>();
+            Animation = new List<ModelAnimation>();
         }
 
         public override void Serialize(Stream stream)
@@ -36,21 +32,21 @@ namespace NetsphereScnTool.Scene.Chunks
 
             using (var w = stream.ToBinaryWriter(true))
             {
-                w.Write(Unk2);
+                w.Write(Version);
 
-                w.WriteEnum(RenderState);
+                w.WriteEnum(Shader);
 
                 w.Serialize(TextureData);
                 w.Serialize(Mesh);
 
-                w.Write(WeightData.Count);
-                w.Serialize(WeightData);
+                w.Write(WeightBone.Count);
+                w.Serialize(WeightBone);
 
                 w.Write(Animation.Count);
                 foreach (var pair in Animation)
                 {
-                    w.WriteCString(pair.Key);
-                    w.Serialize(pair.Value);
+                    w.WriteCString(pair.Name);
+                    w.Serialize(pair.TransformKeyData2);
                 }
             }
         }
@@ -62,8 +58,8 @@ namespace NetsphereScnTool.Scene.Chunks
             using (var r = stream.ToBinaryReader(true))
             {
                 // ## CoreLib::Scene::CRenderable
-                Unk2 = r.ReadSingle();
-                RenderState = r.ReadEnum<RenderState>();
+                Version = r.ReadSingle();
+                Shader = r.ReadEnum<Shader>();
                 // ## CoreLib::Scene::CRenderable
 
                 TextureData = new TextureData(this);
@@ -72,11 +68,11 @@ namespace NetsphereScnTool.Scene.Chunks
                 Mesh = new MeshData(this);
                 Mesh.Deserialize(stream);
 
-                WeightData = r.DeserializeArray<WeightData>(r.ReadInt32()).ToList();
+                WeightBone = r.DeserializeArray<WeightBone>(r.ReadInt32()).ToList();
 
                 int count = r.ReadInt32();
                 for (int i = 0; i < count; ++i)
-                    Animation.Add(r.ReadCString(), r.Deserialize<TransformKeyData2>());
+                    Animation.Add(new ModelAnimation { Name = r.ReadCString(), TransformKeyData2 = r.Deserialize<TransformKeyData2>() });
             }
         }
     }
@@ -91,7 +87,7 @@ namespace NetsphereScnTool.Scene.Chunks
         public List<Vector2> UV { get; set; }
         public List<Vector2> UV2 { get; set; }
 
-        public List<Vector3> Unk { get; set; }
+        public List<Vector3> Tangents { get; set; }
 
         public MeshData(ModelChunk modelChunk)
         {
@@ -100,7 +96,7 @@ namespace NetsphereScnTool.Scene.Chunks
             Normals = new List<Vector3>();
             UV = new List<Vector2>();
             UV2 = new List<Vector2>();
-            Unk = new List<Vector3>();
+            Tangents = new List<Vector3>();
 
             ModelChunk = modelChunk;
         }
@@ -140,7 +136,7 @@ namespace NetsphereScnTool.Scene.Chunks
                     w.Write(uv.Y);
                 }
 
-                if (ModelChunk.TextureData.Unk2 == 1)
+                if (ModelChunk.TextureData.ExtraUV == 1)
                 {
                     foreach (var uv in UV2)
                     {
@@ -149,8 +145,8 @@ namespace NetsphereScnTool.Scene.Chunks
                     }
                 }
 
-                w.Write(Unk.Count);
-                foreach (var unk in Unk)
+                w.Write(Tangents.Count);
+                foreach (var unk in Tangents)
                 {
                     w.Write(unk.X);
                     w.Write(unk.Y);
@@ -179,7 +175,7 @@ namespace NetsphereScnTool.Scene.Chunks
                 for (int i = 0; i < count; i++)
                     UV.Add(new Vector2(r.ReadSingle(), r.ReadSingle()));
 
-                if (ModelChunk.TextureData.Unk2 == 1)
+                if (ModelChunk.TextureData.ExtraUV == 1)
                 {
                     for (int i = 0; i < count; i++)
                         UV2.Add(new Vector2(r.ReadSingle(), r.ReadSingle()));
@@ -187,36 +183,36 @@ namespace NetsphereScnTool.Scene.Chunks
 
                 count = r.ReadInt32();
                 for (int i = 0; i < count; i++)
-                    Unk.Add(new Vector3(r.ReadSingle(), r.ReadSingle(), r.ReadSingle()));
+                    Tangents.Add(new Vector3(r.ReadSingle(), r.ReadSingle(), r.ReadSingle()));
             }
         }
     }
 
-    public class WeightData : IManualSerializer
+    public class WeightBone : IManualSerializer
     {
-        public string Unk1 { get; set; }
+        public string Name { get; set; }
         public Matrix4x4 Matrix { get; set; }
-        public IList<Vector2> Unk2 { get; set; }
+        public IList<WeightData> Weight { get; set; }
 
-        public WeightData()
+        public WeightBone()
         {
-            Unk1 = "";
+            Name = "";
             Matrix = Matrix4x4.Identity;
-            Unk2 = new List<Vector2>();
+            Weight = new List<WeightData>();
         }
 
         public virtual void Serialize(Stream stream)
         {
             using (var w = stream.ToBinaryWriter(true))
             {
-                w.WriteCString(Unk1);
+                w.WriteCString(Name);
                 w.Write(Matrix);
 
-                w.Write(Unk2.Count);
-                foreach (var unk in Unk2)
+                w.Write(Weight.Count);
+                foreach (var weight in Weight)
                 {
-                    w.Write(unk.X);
-                    w.Write(unk.Y);
+                    w.Write(weight.Vertex);
+                    w.Write(weight.Weight);
                 }
             }
         }
@@ -225,22 +221,28 @@ namespace NetsphereScnTool.Scene.Chunks
         {
             using (var r = stream.ToBinaryReader(true))
             {
-                Unk1 = r.ReadCString();
+                Name = r.ReadCString();
                 Matrix = r.ReadMatrix();
 
                 uint count = r.ReadUInt32();
                 for (int i = 0; i < count; i++)
-                    Unk2.Add(new Vector2(r.ReadSingle(), r.ReadSingle()));
+                    Weight.Add(new WeightData { Vertex = r.ReadUInt32(), Weight = r.ReadSingle() });
             }
         }
+    }
+
+    public struct WeightData
+    {
+        public uint Vertex;
+        public float Weight;
     }
 
     // Game::CActorGeomData
     public class TextureData : IManualSerializer
     {
-        public float Unk1 { get; set; }
+        public float Version { get; set; }
         public ModelChunk ModelChunk { get; }
-        public int Unk2 { get; set; }
+        public uint ExtraUV { get; set; }
         public List<TextureEntry> Textures { get; set; }
 
         public TextureData(ModelChunk modelChunk)
@@ -253,15 +255,15 @@ namespace NetsphereScnTool.Scene.Chunks
         {
             using (var w = stream.ToBinaryWriter(true))
             {
-                w.Write(Unk1);
-                if (Unk1 >= 0.2000000029802322f)
-                    w.Write(Unk2);
+                w.Write(Version);
+                if (Version >= 0.2000000029802322f)
+                    w.Write(ExtraUV);
 
                 w.Write(Textures.Count);
                 foreach (var texture in Textures)
                 {
                     w.WriteCString(texture.FileName, 1024);
-                    if (Unk1 >= 0.2000000029802322f)
+                    if (Version >= 0.2000000029802322f)
                         w.WriteCString(texture.FileName2, 1024);
 
                     w.Write(texture.FaceCounter);
@@ -274,10 +276,10 @@ namespace NetsphereScnTool.Scene.Chunks
         {
             using (var r = stream.ToBinaryReader(true))
             {
-                Unk1 = r.ReadSingle();
+                Version = r.ReadSingle();
 
-                if (Unk1 >= 0.2000000029802322f)
-                    Unk2 = r.ReadInt32();
+                if (Version >= 0.2000000029802322f)
+                    ExtraUV = r.ReadUInt32();
 
                 uint count = r.ReadUInt32();
                 for (int i = 0; i < count; i++)
@@ -288,7 +290,7 @@ namespace NetsphereScnTool.Scene.Chunks
                         FileName2 = ""
                     };
 
-                    if (Unk1 >= 0.2000000029802322f)
+                    if (Version >= 0.2000000029802322f)
                         textureData.FileName2 = r.ReadCString(1024);
 
                     textureData.FaceCounter = r.ReadInt32();

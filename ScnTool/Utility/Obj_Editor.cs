@@ -1,26 +1,23 @@
 ﻿using NetsphereScnTool.Scene;
 using NetsphereScnTool.Scene.Chunks;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
-using System.Xml.Linq;
 
 namespace NetsphereScnTool.Utility
 {
     public class Obj_Editor
     {
-        public void EditShader(ModelChunk model, RenderState shader)
+        public void EditShader(ModelChunk model, Shader shader)
         {
-            model.RenderState = shader;
+            model.Shader = shader;
         }
 
-        public void ChangeTexture(ModelChunk model, List<string> textures)
+        public void ChangeTexture(ModelChunk model, IList<string> textures)
         {
             var texts = model.TextureData.Textures;
 
             var txt = new List<TextureEntry>();
 
-            for (var i = 0; i < texts.Count; i++)
+            for (int i = 0; i < texts.Count; i++)
             {
                 txt.Add(new TextureEntry
                 {
@@ -34,7 +31,12 @@ namespace NetsphereScnTool.Utility
             model.TextureData.Textures = txt;
         }
 
-        public void EditAnimation(ModelChunk model, IDictionary<string, TransformKeyData2> animation)
+        public void EditAnimation(BoneChunk bone, IList<BoneAnimation> animation)
+        {
+            bone.Animation = animation;
+        }
+
+        public void EditAnimation(ModelChunk model, IList<ModelAnimation> animation)
         {
             model.Animation = animation;
         }

@@ -13,7 +13,7 @@ namespace NetsphereScnTool.Scene.Chunks
         public string Name { get; set; }
         public string SubName { get; set; }
 
-        public float Unk1 { get; set; }
+        public float Version { get; set; }
         public Matrix4x4 Matrix { get; set; }
 
 
@@ -25,7 +25,7 @@ namespace NetsphereScnTool.Scene.Chunks
         {
             Name = "";
             SubName = "";
-            Unk1 = 0.1f;
+            Version = 0.1f;
             Matrix = Matrix4x4.Identity;
             Container = container;
         }
@@ -34,7 +34,7 @@ namespace NetsphereScnTool.Scene.Chunks
         {
             using (var w = stream.ToBinaryWriter(true))
             {
-                w.Write(Unk1);
+                w.Write(Version);
                 w.Write(Matrix);
             }
         }
@@ -43,7 +43,7 @@ namespace NetsphereScnTool.Scene.Chunks
         {
             using (var r = stream.ToBinaryReader(true))
             {
-                Unk1 = r.ReadSingle();
+                Version = r.ReadSingle();
                 Matrix = r.ReadMatrix();
             }
         }

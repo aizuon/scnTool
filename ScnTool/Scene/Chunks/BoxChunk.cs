@@ -9,24 +9,20 @@ namespace NetsphereScnTool.Scene.Chunks
     {
         public override ChunkType ChunkType => ChunkType.Box;
 
+        public int Unk { get; set; }
         public float Unk2 { get; set; }
-        public float Unk3 { get; set; }
-        public int Unk4 { get; set; }
-        public float Unk5 { get; set; }
-        public int Unk6 { get; set; }
-        public Vector3[] Unk7 { get; set; }
+        public int Unk3 { get; set; }
+        public Vector3[] Unk4 { get; set; }
         public Vector3 Size { get; set; }
 
         public BoxChunk(SceneContainer container)
             : base(container)
         {
-            Unk2 = 0.1f;
-            Unk3 = 0.1f;
-            Unk4 = 0;
-            Unk5 = 0;
-            Unk6 = 0;
-            Unk7 = new[]
-            {
+            Unk = 0;
+            Unk2 = 0;
+            Unk3 = 0;
+            Unk4 = new[]
+{
                 new Vector3(1, 0, 0),
                 new Vector3(0, 1, 0),
                 new Vector3(0, 0, 1)
@@ -36,20 +32,20 @@ namespace NetsphereScnTool.Scene.Chunks
 
         public override void Serialize(Stream stream)
         {
-            if (Unk7.Length != 3)
+            if (Unk4.Length != 3)
                 throw new Exception("Unk7 must have a length of 3");
 
             base.Serialize(stream);
 
             using (var w = stream.ToBinaryWriter(true))
             {
+                w.Write(Version);
+                w.Write(Version);
+                w.Write(Unk);
                 w.Write(Unk2);
                 w.Write(Unk3);
-                w.Write(Unk4);
-                w.Write(Unk5);
-                w.Write(Unk6);
 
-                foreach (var vec in Unk7)
+                foreach (var vec in Unk4)
                 {
                     w.Write(vec.X);
                     w.Write(vec.Y);
@@ -68,14 +64,14 @@ namespace NetsphereScnTool.Scene.Chunks
 
             using (var r = stream.ToBinaryReader(true))
             {
+                Version = r.ReadSingle();
+                Version = r.ReadSingle();
+                Unk = r.ReadInt32();
                 Unk2 = r.ReadSingle();
-                Unk3 = r.ReadSingle();
-                Unk4 = r.ReadInt32();
-                Unk5 = r.ReadSingle();
-                Unk6 = r.ReadInt32();
+                Unk3 = r.ReadInt32();
 
                 for (int i = 0; i < 3; i++)
-                    Unk7[i] = new Vector3(r.ReadSingle(), r.ReadSingle(), r.ReadSingle());
+                    Unk4[i] = new Vector3(r.ReadSingle(), r.ReadSingle(), r.ReadSingle());
 
                 Size = new Vector3(r.ReadSingle(), r.ReadSingle(), r.ReadSingle());
             }

@@ -1,5 +1,4 @@
 ﻿using BlubLib.IO;
-using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -9,14 +8,12 @@ namespace NetsphereScnTool.Scene.Chunks
     {
         public override ChunkType ChunkType => ChunkType.Bone;
 
-        public float Unk2 { get; set; }
-        public IList<Tuple<string, string, TransformKeyData>> Animation { get; set; }
+        public IList<BoneAnimation> Animation { get; set; }
 
         public BoneChunk(SceneContainer container)
             : base(container)
         {
-            Unk2 = 0.1f;
-            Animation = new List<Tuple<string, string, TransformKeyData>>();
+            Animation = new List<BoneAnimation>();
         }
 
         public override void Serialize(Stream stream)
@@ -25,22 +22,22 @@ namespace NetsphereScnTool.Scene.Chunks
 
             using (var w = stream.ToBinaryWriter(true))
             {
-                w.Write(Unk2);
+                w.Write(Version);
 
                 w.Write(Animation.Count);
-                foreach (var tuple in Animation)
+                foreach (var anim in Animation)
                 {
-                    if (Unk2 >= 0.2000000029802322f)
+                    if (Version >= 0.2000000029802322f)
                     {
-                        w.WriteCString(tuple.Item1);
-                        w.WriteCString(tuple.Item2);
-                        if (string.IsNullOrWhiteSpace(tuple.Item2))
-                            w.Serialize(tuple.Item3);
+                        w.WriteCString(anim.Name);
+                        w.WriteCString(anim.Copy);
+                        if (string.IsNullOrWhiteSpace(anim.Copy))
+                            w.Serialize(anim.TransformKeyData);
                     }
                     else
                     {
-                        w.WriteCString(tuple.Item1);
-                        w.Serialize(tuple.Item3);
+                        w.WriteCString(anim.Name);
+                        w.Serialize(anim.TransformKeyData);
                     }
                 }
             }
@@ -52,26 +49,26 @@ namespace NetsphereScnTool.Scene.Chunks
 
             using (var r = stream.ToBinaryReader(true))
             {
-                Unk2 = r.ReadSingle();
+                Version = r.ReadSingle();
 
                 uint count = r.ReadUInt32();
                 for (int i = 0; i < count; i++)
                 {
-                    if (Unk2 >= 0.2000000029802322f)
+                    if (Version >= 0.2000000029802322f)
                     {
                         string name = r.ReadCString();
                         string subName = r.ReadCString();
-                        TransformKeyData transformKeyDatas = null;
+                        TransformKeyData transformKeyData = null;
 
                         if (string.IsNullOrWhiteSpace(subName))
-                            transformKeyDatas = r.Deserialize<TransformKeyData>();
+                            transformKeyData = r.Deserialize<TransformKeyData>();
 
-                        Animation.Add(Tuple.Create(name, subName, transformKeyDatas));
+                        Animation.Add(new BoneAnimation { Name = name, Copy = subName, TransformKeyData = transformKeyData });
                     }
                     else
                     {
                         string name = r.ReadCString();
-                        Animation.Add(Tuple.Create(name, default(string), r.Deserialize<TransformKeyData>()));
+                        Animation.Add(new BoneAnimation { Name = name, Copy = default(string), TransformKeyData = r.Deserialize<TransformKeyData>() });
                     }
                 }
             }

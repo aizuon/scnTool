@@ -57,7 +57,7 @@ namespace NetsphereScnTool.Scene
                 // CoreLib::Scene::CSceneGroup
                 uint chunkCount = r.ReadUInt32();
 
-                if (container.Header.Unk2 >= 0.2000000029802322f)
+                if (container.Header.Version >= 0.2000000029802322f)
                     r.ReadByte(); // ToDo ReadString
 
                 for (int i = 0; i < chunkCount; i++)
@@ -159,7 +159,7 @@ namespace NetsphereScnTool.Scene
                 w.Serialize(Header);
 
                 w.Write(Count);
-                if (Header.Unk2 >= 0.2000000029802322f)
+                if (Header.Version >= 0.2000000029802322f)
                     w.Write((byte)0);
 
                 foreach (var chunk in this)
@@ -176,37 +176,35 @@ namespace NetsphereScnTool.Scene
 
     public class SceneHeader : IManualSerializer
     {
-        public const uint Version = 1;
+        public const uint c_Version = 1;
         public const uint Magic = 0x6278d57a;
 
         public string Name { get; set; }
         public string SubName { get; set; }
-        public float Unk1 { get; set; }
+        public float Version { get; set; }
         public Matrix4x4 Matrix { get; set; }
-        public float Unk2 { get; set; }
 
         internal SceneHeader()
         {
             Name = "";
             SubName = "";
-            Unk1 = 0.1f;
+            Version = 0.1f;
             Matrix = Matrix4x4.Identity;
-            Unk2 = 0.1f;
         }
 
         public void Serialize(Stream stream)
         {
             using (var w = stream.ToBinaryWriter(true))
             {
-                w.Write(Version);
+                w.Write(c_Version);
                 w.Write(Magic);
 
                 w.WriteCString(Name);
                 w.WriteCString(SubName);
 
-                w.Write(Unk1);
+                w.Write(Version);
                 w.Write(Matrix);
-                w.Write(Unk2);
+                w.Write(Version);
             }
         }
 
@@ -226,11 +224,11 @@ namespace NetsphereScnTool.Scene
                 SubName = r.ReadCString();
 
                 // CoreLib::Scene::CSceneNode
-                Unk1 = r.ReadSingle();
+                Version = r.ReadSingle();
                 Matrix = r.ReadMatrix();
 
                 // CoreLib::Scene::CSceneGroup
-                Unk2 = r.ReadSingle();
+                Version = r.ReadSingle();
             }
         }
     }

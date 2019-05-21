@@ -7,8 +7,6 @@ namespace NetsphereScnTool.Scene.Chunks
     {
         public override ChunkType ChunkType => ChunkType.BoneSystem;
 
-        public int Unk2 { get; set; }
-
         public BoneSystemChunk(SceneContainer container)
             : base(container)
         { }
@@ -19,7 +17,7 @@ namespace NetsphereScnTool.Scene.Chunks
 
             using (var w = stream.ToBinaryWriter(true))
             {
-                w.Write(Unk2);
+                w.Write(Version);
             }
         }
 
@@ -29,7 +27,7 @@ namespace NetsphereScnTool.Scene.Chunks
 
             using (var r = stream.ToBinaryReader(true))
             {
-                Unk2 = r.ReadInt32();
+                Version = r.ReadSingle();
             }
         }
     }

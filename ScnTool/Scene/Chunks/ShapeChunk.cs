@@ -10,13 +10,12 @@ namespace NetsphereScnTool.Scene.Chunks
     {
         public override ChunkType ChunkType => ChunkType.Shape;
 
-        public float Unk2 { get; set; }
-        public IList<Tuple<Vector3, Vector3>> Unk3 { get; set; }
+        public IList<Tuple<Vector3, Vector3>> Unk { get; set; }
 
         public ShapeChunk(SceneContainer container)
             : base(container)
         {
-            Unk3 = new List<Tuple<Vector3, Vector3>>();
+            Unk = new List<Tuple<Vector3, Vector3>>();
         }
 
         public override void Serialize(Stream stream)
@@ -25,11 +24,11 @@ namespace NetsphereScnTool.Scene.Chunks
 
             using (var w = stream.ToBinaryWriter(true))
             {
-                w.Write(Unk2);
-                if (Unk2 >= 0.1000000014901161f)
+                w.Write(Version);
+                if (Version >= 0.1000000014901161f)
                 {
-                    w.Write(Unk3.Count);
-                    foreach (var unk in Unk3)
+                    w.Write(Unk.Count);
+                    foreach (var unk in Unk)
                     {
                         w.Write(unk.Item1.X);
                         w.Write(unk.Item1.Y);
@@ -49,14 +48,14 @@ namespace NetsphereScnTool.Scene.Chunks
 
             using (var r = stream.ToBinaryReader(true))
             {
-                Unk2 = r.ReadSingle();
+                Version = r.ReadSingle();
 
-                if (Unk2 >= 0.1000000014901161f)
+                if (Version >= 0.1000000014901161f)
                 {
                     uint count = r.ReadUInt32();
                     for (int i = 0; i < count; i++)
                     {
-                        Unk3.Add(Tuple.Create(new Vector3(r.ReadSingle(), r.ReadSingle(), r.ReadSingle()),
+                        Unk.Add(Tuple.Create(new Vector3(r.ReadSingle(), r.ReadSingle(), r.ReadSingle()),
                             new Vector3(r.ReadSingle(), r.ReadSingle(), r.ReadSingle())));
                     }
                 }

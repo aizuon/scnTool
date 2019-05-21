@@ -45,11 +45,6 @@ namespace NetsphereScnTool.Utility
         {
             w.WriteLine("mtllib {0}.mtl", Path.GetFileNameWithoutExtension(fileName));
             w.WriteLine();
-            Vector3 scale;
-            Quaternion rotation;
-            Vector3 translation;
-
-            Matrix4x4.Decompose(model.Matrix, out scale, out rotation, out translation);
 
             foreach (var vertex in model.Mesh.Vertices)
             {
@@ -132,12 +127,6 @@ namespace NetsphereScnTool.Utility
             int vertexCounter = 0;
             foreach (var model in models)
             {
-                Vector3 scale;
-                Quaternion rotation;
-                Vector3 translation;
-
-                Matrix4x4.Decompose(model.Matrix, out scale, out rotation, out translation);
-
                 foreach (var vertex in model.Mesh.Vertices)
                 {
                     var v = Vector3.Transform(vertex, model.Matrix);

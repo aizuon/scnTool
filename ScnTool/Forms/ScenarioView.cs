@@ -182,7 +182,7 @@ namespace NetsphereScnTool.Forms
             new Task(() =>
             {
                 var tcs = new TaskCompletionSource<bool>();
-                var shadereditView = new ShaderEditView(model.RenderState, tcs);
+                var shadereditView = new ShaderEditView(model.Shader, tcs);
                 shadereditView.ShowDialog();
                 tcs.Task.GetAwaiter().GetResult();
 
@@ -234,20 +234,40 @@ namespace NetsphereScnTool.Forms
             string name = container.ElementAt(index).Name;
             var scene = container.FirstOrDefault(x => x.Name == name);
 
-            var model = scene as ModelChunk;
+            var bone = scene as BoneChunk;
 
-            new Task(() =>
+            if (bone != null)
             {
-                var tcs = new TaskCompletionSource<bool>();
-                var animationeditView = new AnimationEditView(model.Animation, tcs);
-                animationeditView.ShowDialog();
-                tcs.Task.GetAwaiter().GetResult();
+                new Task(() =>
+                {
+                    var tcs = new TaskCompletionSource<bool>();
+                    var animationeditView = new AnimationEditView(bone.Animation, tcs);
+                    animationeditView.ShowDialog();
+                    tcs.Task.GetAwaiter().GetResult();
 
-                var editor = new Obj_Editor();
+                    var editor = new Obj_Editor();
 
-                editor.EditAnimation(model, animationeditView.Animation);
-                animationeditView.Dispose();
-            }).Start();
+                    editor.EditAnimation(bone, animationeditView.BoneAnimation);
+                    animationeditView.Dispose();
+                }).Start();
+            }
+            else
+            {
+                var model = scene as ModelChunk;
+
+                new Task(() =>
+                {
+                    var tcs = new TaskCompletionSource<bool>();
+                    var animationeditView = new AnimationEditView(model.Animation, tcs);
+                    animationeditView.ShowDialog();
+                    tcs.Task.GetAwaiter().GetResult();
+
+                    var editor = new Obj_Editor();
+
+                    editor.EditAnimation(model, animationeditView.ModelAnimation);
+                    animationeditView.Dispose();
+                }).Start();
+            }
 
             return true;
         }

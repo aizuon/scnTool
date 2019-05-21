@@ -9,20 +9,20 @@ namespace NetsphereScnTool.Forms
 {
     public partial class ShaderEditView : Form
     {
-        public RenderState selectedShader;
+        public Shader selectedShader;
 
         private readonly TaskCompletionSource<bool> _tcs;
 
         private readonly List<CheckBox> cbx;
-        private readonly List<RenderState> evals;
+        private readonly List<Shader> evals;
 
-        public ShaderEditView(RenderState shader, TaskCompletionSource<bool> tcs)
+        public ShaderEditView(Shader shader, TaskCompletionSource<bool> tcs)
         {
             InitializeComponent();
 
             cbx = Controls.OfType<CheckBox>().Where(c => c != None).ToList();
 
-            evals = Enum.GetValues(typeof(RenderState)).Cast<RenderState>().Where(s => s != RenderState.None).ToList();
+            evals = Enum.GetValues(typeof(Shader)).Cast<Shader>().Where(s => s != Scene.Shader.None).ToList();
 
             uint i = 0;
             foreach (var eval in evals)
@@ -65,7 +65,7 @@ namespace NetsphereScnTool.Forms
             }
 
             if (i == 0)
-                selectedShader = RenderState.None;
+                selectedShader = Scene.Shader.None;
 
             _tcs.SetResult(true);
             Hide();

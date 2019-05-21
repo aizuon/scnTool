@@ -3,7 +3,7 @@
 namespace NetsphereScnTool.Scene
 {
     [Flags]
-    public enum RenderState
+    public enum Shader
     {
         None = 0,
         NoLight = 1,

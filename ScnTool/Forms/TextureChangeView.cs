@@ -28,7 +28,7 @@ namespace NetsphereScnTool.Forms
         {
             var split = txts.Text.Split(Environment.NewLine.ToCharArray());
             var slist = split.ToList();
-            slist.Remove(Environment.NewLine);
+            slist.Remove(string.Empty);
             Textures = slist;
 
             _tcs.SetResult(true);
