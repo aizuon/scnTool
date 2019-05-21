@@ -459,7 +459,7 @@ namespace NetsphereScnTool.Forms
                     m.Duration = TimeSpan.FromMilliseconds(double.Parse(morphkey[n].Attribute("tick_time").Value));
 
                     var mpl = new List<Vector3>();
-                    var mp = morphkey[n].Elements().Where(_ => _.Name == "morph_positions").ToList();
+                    var mp = morphkey[n].Elements().Where(_ => _.Name == "morph_position").ToList();
                     for (int o = 0; o < mp.Count; o++)
                     {
                         mpl.Add(new Vector3(
@@ -470,7 +470,7 @@ namespace NetsphereScnTool.Forms
                     m.Positions = mpl;
 
                     var mrl = new List<Quaternion>();
-                    var mr = morphkey[n].Elements().Where(_ => _.Name == "morph_rotations").ToList();
+                    var mr = morphkey[n].Elements().Where(_ => _.Name == "morph_rotation").ToList();
                     for (int p = 0; p < mr.Count; p++)
                     {
                         mrl.Add(new Vector3(

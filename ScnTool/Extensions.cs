@@ -68,9 +68,9 @@ namespace NetsphereScnTool
 
         public static Quaternion ToQuaternion(this Vector3 v)
         {
-            float yaw = (float)Deg2Rad(v.Y);
-            float pitch = (float)Deg2Rad(v.X);
-            float roll = (float)Deg2Rad(v.Z);
+            float yaw = Deg2Rad(v.Y);
+            float pitch = Deg2Rad(v.X);
+            float roll = Deg2Rad(v.Z);
             float rollOver2 = roll * 0.5f;
             float sinRollOver2 = (float)Math.Sin(rollOver2);
             float cosRollOver2 = (float)Math.Cos(rollOver2);
@@ -106,18 +106,23 @@ namespace NetsphereScnTool
                 v.Z = 0;
                 return NormalizeAngles(v * _Rad2Deg);
             }
-            if (test < -0.4995f * unit) // singularity at south pole
+            else if (test < -0.4995f * unit) // singularity at south pole
             {
                 v.Y = (float)(-2f * Math.Atan2(q1.Y, q1.X));
                 v.X = (float)(-Math.PI / 2);
                 v.Z = 0;
                 return NormalizeAngles(v * _Rad2Deg);
             }
-            var q = new Quaternion(q1.W, q1.Z, q1.X, q1.Y);
-            v.Y = (float)Math.Atan2(2f * q.X * q.W + 2f * q.Y * q.Z, 1 - 2f * (q.Z * q.Z + q.W * q.W));      // Yaw
-            v.X = (float)Math.Asin(2f * (q.X * q.Z - q.W * q.Y));                                            // Pitch
-            v.Z = (float)Math.Atan2(2f * q.X * q.Y + 2f * q.Z * q.W, 1 - 2f * (q.Y * q.Y + q.Z * q.Z));      // Roll
-            return NormalizeAngles(v * _Rad2Deg);
+            else
+            {
+                var q = new Quaternion(q1.W, q1.Z, q1.X, q1.Y);
+                if (unit != 1)
+                    q *= (float)(1 / Math.Sqrt(unit)); //normalize
+                v.Y = (float)Math.Atan2(2f * q.X * q.W + 2f * q.Y * q.Z, 1 - 2f * (q.Z * q.Z + q.W * q.W));      // Yaw
+                v.X = (float)Math.Asin(2f * (q.X * q.Z - q.W * q.Y));                                            // Pitch
+                v.Z = (float)Math.Atan2(2f * q.X * q.Y + 2f * q.Z * q.W, 1 - 2f * (q.Y * q.Y + q.Z * q.Z));      // Roll
+                return NormalizeAngles(v * _Rad2Deg);
+            }
         }
 
         private static Vector3 NormalizeAngles(Vector3 angles)
@@ -137,14 +142,14 @@ namespace NetsphereScnTool
             return angle;
         }
 
-        private static double Deg2Rad(double angle)
+        private static float Deg2Rad(float angle)
         {
-            return Math.PI * angle / 180.0;
+            return (float)(Math.PI * angle / 180.0);
         }
 
-        private static double Rad2Deg(double angle)
+        private static float Rad2Deg(float angle)
         {
-            return angle * (180.0 / Math.PI);
+            return (float)(angle * (180.0 / Math.PI));
         }
     }
 
