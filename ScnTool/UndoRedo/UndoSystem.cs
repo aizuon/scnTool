@@ -90,9 +90,9 @@ namespace NetsphereScnTool.UndoRedo
         {
             if (undo_object.Count() >= _maxObjects)
             {
-                var tempStack = (Stack<T>)undo_object.Reverse();
+                var tempStack = undo_object.Reverse();
                 tempStack.Pop();
-                undo_object = (Stack<T>)tempStack.Reverse();
+                undo_object = tempStack.Reverse();
             }
 
             if (_firstStart)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
 using System.Windows.Forms;
@@ -144,6 +145,21 @@ namespace NetsphereScnTool
         private static double Rad2Deg(double angle)
         {
             return angle * (180.0 / Math.PI);
+        }
+    }
+
+    public static class StackExtensions
+    {
+        public static Stack<T> Reverse<T>(this Stack<T> st)
+        {
+            var rev = new Stack<T>();
+
+            while (st.Count != 0)
+            {
+                rev.Push(st.Pop());
+            }
+
+            return rev;
         }
     }
 }
