@@ -705,12 +705,7 @@ namespace NetsphereScnTool.Forms
             result = f_edit_shader(data_view.SelectedRows[0].Index);
 
             if (result)
-            {
-                update_view();
-                update_status();
-
                 undo_manager.Save(container);
-            }
             else
                 MessageBox.Show("Unable to change shader", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -724,12 +719,7 @@ namespace NetsphereScnTool.Forms
             result = f_change_texture(data_view.SelectedRows[0].Index);
 
             if (result)
-            {
-                update_view();
-                update_status();
-
                 undo_manager.Save(container);
-            }
             else
                 MessageBox.Show("Unable to change texture", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -743,12 +733,7 @@ namespace NetsphereScnTool.Forms
             result = f_edit_animation(data_view.SelectedRows[0].Index);
 
             if (result)
-            {
-                update_view();
-                update_status();
-
                 undo_manager.Save(container);
-            }
             else
                 MessageBox.Show("Unable to change animation", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -759,9 +744,6 @@ namespace NetsphereScnTool.Forms
                 return;
 
             f_draw_mesh(data_view.SelectedRows[0].Index);
-
-            update_view();
-            update_status();
 
             undo_manager.Save(container);
         }
