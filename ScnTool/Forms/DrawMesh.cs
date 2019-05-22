@@ -56,10 +56,7 @@ namespace NetsphereScnTool.Forms
                 trans = transMin;
         }
 
-        private bool IsClockwise(PointF p1, PointF p2, PointF p3)
-        {
-            return (p2.X - p1.X) * (p3.Y - p1.Y) - (p2.Y - p1.Y) * (p3.X - p1.X) >= 0;
-        }
+        private bool IsClockwise(PointF p1, PointF p2, PointF p3) => (p2.X - p1.X) * (p3.Y - p1.Y) - (p2.Y - p1.Y) * (p3.X - p1.X) >= 0;
 
         private void DrawMesh_Paint(object sender, PaintEventArgs e)
         {
@@ -94,13 +91,13 @@ namespace NetsphereScnTool.Forms
                             float maxZ = 0;
                             foreach (var v in v3list)
                             {
-                                var absZ = Math.Abs(v.Z);
+                                float absZ = Math.Abs(v.Z);
 
                                 if (absZ > maxZ)
                                     maxZ = absZ;
                             }
 
-                            var grayscale = (int)(Math.Abs((v3list[(int)_mesh.Faces[i].X].Z + v3list[(int)_mesh.Faces[i].Y].Z + v3list[(int)_mesh.Faces[i].Z].Z) / 3) * 255 / maxZ);
+                            int grayscale = (int)(Math.Abs((v3list[(int)_mesh.Faces[i].X].Z + v3list[(int)_mesh.Faces[i].Y].Z + v3list[(int)_mesh.Faces[i].Z].Z) / 3) * 255 / maxZ);
 
                             e.Graphics.FillPolygon(new SolidBrush(Color.FromArgb(grayscale, grayscale, grayscale)), polygon);
                         }
@@ -119,10 +116,7 @@ namespace NetsphereScnTool.Forms
             }
         }
 
-        private void DrawMesh_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Dispose();
-        }
+        private void DrawMesh_FormClosed(object sender, FormClosedEventArgs e) => Dispose();
 
         private void DrawMesh_KeyDown(object sender, KeyEventArgs e)
         {
@@ -203,9 +197,6 @@ namespace NetsphereScnTool.Forms
             Refresh();
         }
 
-        private void DrawMesh_ClientSizeChanged(object sender, EventArgs e)
-        {
-            Refresh();
-        }
+        private void DrawMesh_ClientSizeChanged(object sender, EventArgs e) => Refresh();
     }
 }

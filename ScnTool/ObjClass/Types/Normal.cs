@@ -34,9 +34,6 @@ namespace ObjParser.Types
             Z = z;
         }
 
-        public override string ToString()
-        {
-            return string.Format("v {0} {1} {2}", X, Y, Z);
-        }
+        public override string ToString() => string.Format("v {0} {1} {2}", X, Y, Z);
     }
 }

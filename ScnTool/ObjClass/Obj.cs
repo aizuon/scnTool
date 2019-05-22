@@ -26,10 +26,7 @@ namespace ObjParser
             NormalList = new List<Normal>();
         }
 
-        public void LoadObj(string path)
-        {
-            LoadObj(File.ReadAllLines(path));
-        }
+        public void LoadObj(string path) => LoadObj(File.ReadAllLines(path));
 
         public void LoadObj(Stream data)
         {

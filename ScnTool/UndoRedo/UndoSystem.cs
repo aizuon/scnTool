@@ -16,11 +16,8 @@ namespace NetsphereScnTool.UndoRedo
 
         public T Current_Object
         {
-            get
-            {
-                return current_object;
-            }
-            internal set { current_object = value; }
+            get => current_object;
+            internal set => current_object = value;
         }
 
         #region Delegate

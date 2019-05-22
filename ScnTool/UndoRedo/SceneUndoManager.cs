@@ -14,9 +14,6 @@ namespace NetsphereScnTool.UndoRedo
             base.Save(_container);
         }
 
-        public SceneContainer GetContainer()
-        {
-            return Current_Object.Clone() as SceneContainer;
-        }
+        public SceneContainer GetContainer() => Current_Object.Clone() as SceneContainer;
     }
 }

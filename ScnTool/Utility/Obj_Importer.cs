@@ -26,18 +26,18 @@ namespace NetsphereScnTool.Utility
             Matrix4x4.Invert(model.Matrix, out _matrix);
 
             for (int index = 0; index < obj.VertexList.Count; index++)
-                VertexList.Add(new Vector3(float.Parse(obj.VertexList[index].X.ToString())/100,
-                                           float.Parse(obj.VertexList[index].Y.ToString())/100,
-                                           float.Parse(obj.VertexList[index].Z.ToString())/100));
+                VertexList.Add(new Vector3(float.Parse(obj.VertexList[index].X.ToString()) / 100,
+                                           float.Parse(obj.VertexList[index].Y.ToString()) / 100,
+                                           float.Parse(obj.VertexList[index].Z.ToString()) / 100));
 
             for (int index = 0; index < obj.NormalList.Count; index++)
-                NormalList.Add(new Vector3(float.Parse(obj.NormalList[index].X.ToString())/100,
-                                           float.Parse(obj.NormalList[index].Y.ToString())/100,
-                                           float.Parse(obj.NormalList[index].Z.ToString())/100));
+                NormalList.Add(new Vector3(float.Parse(obj.NormalList[index].X.ToString()) / 100,
+                                           float.Parse(obj.NormalList[index].Y.ToString()) / 100,
+                                           float.Parse(obj.NormalList[index].Z.ToString()) / 100));
 
             for (int index = 0; index < obj.TextureList.Count; index++)
-                UVList.Add(new Vector2(float.Parse(obj.TextureList[index].X.ToString())/100, 0.0f -
-                                       float.Parse(obj.TextureList[index].Y.ToString())/100));
+                UVList.Add(new Vector2(float.Parse(obj.TextureList[index].X.ToString()) / 100, 0.0f -
+                                       float.Parse(obj.TextureList[index].Y.ToString()) / 100));
 
             var vector_temp = new List<Vector3>();
             for (int index = 0; index < VertexList.Count; index++)
@@ -64,12 +64,14 @@ namespace NetsphereScnTool.Utility
                                           Convert.ToInt32(_Z[0]) - 1));
             }
 
-            var texture = new TextureEntry();
-            texture.FaceCount = obj.FaceList.Count;
-            texture.FaceCounter = 0;
+            var texture = new TextureEntry
+            {
+                FaceCount = obj.FaceList.Count,
+                FaceCounter = 0,
 
-            texture.FileName = model.TextureData.Textures[0].FileName;
-            texture.FileName2 = model.TextureData.Textures[0].FileName2;
+                FileName = model.TextureData.Textures[0].FileName,
+                FileName2 = model.TextureData.Textures[0].FileName2
+            };
 
             if (model.TextureData.Textures.Count != 0)
                 model.TextureData.Textures[0] = texture;
@@ -98,18 +100,18 @@ namespace NetsphereScnTool.Utility
             var model = new ModelChunk(container);
 
             for (int index = 0; index < obj.VertexList.Count; index++)
-                VertexList.Add(new Vector3(float.Parse(obj.VertexList[index].X.ToString())/100,
-                                           float.Parse(obj.VertexList[index].Y.ToString())/100,
-                                           float.Parse(obj.VertexList[index].Z.ToString())/100));
+                VertexList.Add(new Vector3(float.Parse(obj.VertexList[index].X.ToString()) / 100,
+                                           float.Parse(obj.VertexList[index].Y.ToString()) / 100,
+                                           float.Parse(obj.VertexList[index].Z.ToString()) / 100));
 
             for (int index = 0; index < obj.NormalList.Count; index++)
-                NormalList.Add(new Vector3(float.Parse(obj.NormalList[index].X.ToString())/100,
-                                           float.Parse(obj.NormalList[index].Y.ToString())/100,
-                                           float.Parse(obj.NormalList[index].Z.ToString())/100));
+                NormalList.Add(new Vector3(float.Parse(obj.NormalList[index].X.ToString()) / 100,
+                                           float.Parse(obj.NormalList[index].Y.ToString()) / 100,
+                                           float.Parse(obj.NormalList[index].Z.ToString()) / 100));
 
             for (int index = 0; index < obj.TextureList.Count; index++)
-                UVList.Add(new Vector2(float.Parse(obj.TextureList[index].X.ToString())/100, 0.0f -
-                                       float.Parse(obj.TextureList[index].Y.ToString())/100));
+                UVList.Add(new Vector2(float.Parse(obj.TextureList[index].X.ToString()) / 100, 0.0f -
+                                       float.Parse(obj.TextureList[index].Y.ToString()) / 100));
 
             for (int index = 0; index < VertexList.Count; index++)
                 model.Mesh.Vertices.Add(VertexList[index]);
@@ -132,12 +134,14 @@ namespace NetsphereScnTool.Utility
                                           Convert.ToInt32(_Z[0]) - 1));
             }
 
-            var texture = new TextureEntry();
-            texture.FaceCount = obj.FaceList.Count;
-            texture.FaceCounter = 0;
+            var texture = new TextureEntry
+            {
+                FaceCount = obj.FaceList.Count,
+                FaceCounter = 0,
 
-            texture.FileName = textureName;
-            texture.FileName2 = "";
+                FileName = textureName,
+                FileName2 = ""
+            };
 
             if (model.TextureData.Textures.Count != 0)
                 model.TextureData.Textures[0] = texture;

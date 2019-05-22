@@ -204,7 +204,7 @@ namespace NetsphereScnTool.Forms
                 {
                     var e13 = new XElement("morph_key");
                     e13.SetAttributeValue("tick_time", transformkeydata2.MorphKeys[n].Duration.TotalMilliseconds);
-                    
+
                     for (int o = 0; o < transformkeydata2.MorphKeys[n].Positions.Count; o++)
                     {
                         var e14 = new XElement("morph_position");
@@ -274,25 +274,26 @@ namespace NetsphereScnTool.Forms
                 var inits = es[i].Elements().ToList()[0].Elements().ToList();
                 if (inits.Count != 0)
                 {
-                    transformkeydata.TransformKey = new TransformKey();
-
-                    transformkeydata.TransformKey.Translation = new Vector3(
+                    transformkeydata.TransformKey = new TransformKey
+                    {
+                        Translation = new Vector3(
                         float.Parse(inits[0].Attribute("X").Value),
                         float.Parse(inits[0].Attribute("Y").Value),
                         float.Parse(inits[0].Attribute("Z").Value)
-                    );
+                    ),
 
-                    transformkeydata.TransformKey.Rotation = new Vector3(
+                        Rotation = new Vector3(
                         float.Parse(inits[1].Attribute("X").Value),
                         float.Parse(inits[1].Attribute("Y").Value),
                         float.Parse(inits[1].Attribute("Z").Value)
-                    ).ToQuaternion();
+                    ).ToQuaternion(),
 
-                    transformkeydata.TransformKey.Scale = new Vector3(
+                        Scale = new Vector3(
                         float.Parse(inits[2].Attribute("X").Value),
                         float.Parse(inits[2].Attribute("Y").Value),
                         float.Parse(inits[2].Attribute("Z").Value)
-                    );
+                    )
+                    };
 
                     var transformkey = es[i].Elements().ToList()[1].Elements();
 
@@ -454,9 +455,10 @@ namespace NetsphereScnTool.Forms
                 var morphkey = es[i].Elements().ToList()[3].Elements().ToList();
                 for (int n = 0; n < morphkey.Count(); n++)
                 {
-                    var m = new MorphKey();
-
-                    m.Duration = TimeSpan.FromMilliseconds(double.Parse(morphkey[n].Attribute("tick_time").Value));
+                    var m = new MorphKey
+                    {
+                        Duration = TimeSpan.FromMilliseconds(double.Parse(morphkey[n].Attribute("tick_time").Value))
+                    };
 
                     var mpl = new List<Vector3>();
                     var mp = morphkey[n].Elements().Where(_ => _.Name == "morph_position").ToList();

@@ -32,8 +32,7 @@ namespace ObjParser.Types
             {
                 string[] parts = data[i + 1].Split('/');
 
-                int vindex;
-                success = int.TryParse(parts[0], NumberStyles.Any, CultureInfo.InvariantCulture, out vindex);
+                success = int.TryParse(parts[0], NumberStyles.Any, CultureInfo.InvariantCulture, out int vindex);
                 if (!success)
                     throw new ArgumentException("Could not parse parameter as int");
                 VertexIndexList[i] = vindex;

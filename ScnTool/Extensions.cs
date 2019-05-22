@@ -142,15 +142,9 @@ namespace NetsphereScnTool
             return angle;
         }
 
-        private static float Deg2Rad(float angle)
-        {
-            return (float)(Math.PI * angle / 180.0);
-        }
+        private static float Deg2Rad(float angle) => (float)(Math.PI * angle / 180.0);
 
-        private static float Rad2Deg(float angle)
-        {
-            return (float)(angle * (180.0 / Math.PI));
-        }
+        private static float Rad2Deg(float angle) => (float)(angle * (180.0 / Math.PI));
     }
 
     public static class StackExtensions

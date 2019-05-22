@@ -122,8 +122,10 @@ namespace NetsphereScnTool.Forms
             if (container == null)
                 return false;
 
-            var file = new OpenFileDialog();
-            file.Filter = ".obj|*.obj";
+            var file = new OpenFileDialog
+            {
+                Filter = ".obj|*.obj"
+            };
 
             if (file.ShowDialog() == DialogResult.OK)
             {
@@ -154,8 +156,10 @@ namespace NetsphereScnTool.Forms
             string name = container.ElementAt(index).Name;
             var scene = container.FirstOrDefault(x => x.Name == name);
 
-            var file = new OpenFileDialog();
-            file.Filter = ".obj|*.obj";
+            var file = new OpenFileDialog
+            {
+                Filter = ".obj|*.obj"
+            };
 
             if (file.ShowDialog() == DialogResult.OK)
             {
@@ -326,9 +330,11 @@ namespace NetsphereScnTool.Forms
             var chunk = container.FirstOrDefault(x => x.Name == name);
             if (chunk != null)
             {
-                var save_dg = new SaveFileDialog();
-                save_dg.FileName = $"{chunk.Name}";
-                save_dg.Filter = ".scn_part|*.scn_part";
+                var save_dg = new SaveFileDialog
+                {
+                    FileName = $"{chunk.Name}",
+                    Filter = ".scn_part|*.scn_part"
+                };
 
                 if (save_dg.ShowDialog() == DialogResult.OK)
                 {
@@ -383,9 +389,11 @@ namespace NetsphereScnTool.Forms
             if (container == null)
                 return false;
 
-            var file = new OpenFileDialog();
-            file.Multiselect = true;
-            file.Filter = ".scn_part|*.scn_part";
+            var file = new OpenFileDialog
+            {
+                Multiselect = true,
+                Filter = ".scn_part|*.scn_part"
+            };
 
             if (file.ShowDialog() == DialogResult.OK)
             {
@@ -498,8 +506,10 @@ namespace NetsphereScnTool.Forms
 
         private void update_view()
         {
-            var bSource = new BindingSource();
-            bSource.DataSource = container;
+            var bSource = new BindingSource
+            {
+                DataSource = container
+            };
             data_view.DataSource = bSource;
 
             data_view.Update();
@@ -568,9 +578,11 @@ namespace NetsphereScnTool.Forms
             if (container == null)
                 return;
 
-            var file = new SaveFileDialog();
-            file.FileName = Path.GetFileName(container_path);
-            file.Filter = "scn|*.scn";
+            var file = new SaveFileDialog
+            {
+                FileName = Path.GetFileName(container_path),
+                Filter = "scn|*.scn"
+            };
 
             if (file.ShowDialog() == DialogResult.OK)
             {
@@ -881,8 +893,10 @@ namespace NetsphereScnTool.Forms
             if (container != null)
                 return;
 
-            var file = new OpenFileDialog();
-            file.Filter = ".scn|*.scn";
+            var file = new OpenFileDialog
+            {
+                Filter = ".scn|*.scn"
+            };
 
             if (file.ShowDialog() == DialogResult.OK)
             {

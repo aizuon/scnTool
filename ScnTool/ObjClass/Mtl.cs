@@ -15,10 +15,7 @@ namespace ObjParser
             MaterialList = new List<Material>();
         }
 
-        public void LoadMtl(string path)
-        {
-            LoadMtl(File.ReadAllLines(path));
-        }
+        public void LoadMtl(string path) => LoadMtl(File.ReadAllLines(path));
 
         public void LoadMtl(Stream data)
         {
@@ -80,8 +77,10 @@ namespace ObjParser
                 switch (parts[0])
                 {
                     case "newmtl":
-                        CurrentMaterial = new Material();
-                        CurrentMaterial.Name = parts[1];
+                        CurrentMaterial = new Material
+                        {
+                            Name = parts[1]
+                        };
                         MaterialList.Add(CurrentMaterial);
                         break;
                     case "Ka":

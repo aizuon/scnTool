@@ -10,16 +10,16 @@ namespace NetsphereScnTool.Utility
 
         public List<int> LinkedIDs
         {
-            get { return _linkedIDs; }
-            set { _linkedIDs = value; }
+            get => _linkedIDs;
+            set => _linkedIDs = value;
         }
 
         private bool _isModified;
 
         public bool IsModified
         {
-            get { return _isModified; }
-            set { _isModified = value; }
+            get => _isModified;
+            set => _isModified = value;
         }
 
         private bool _isSorted;
@@ -69,25 +69,13 @@ namespace NetsphereScnTool.Utility
             }
         }
 
-        protected override bool SupportsSortingCore
-        {
-            get { return true; }
-        }
+        protected override bool SupportsSortingCore => true;
 
-        protected override bool IsSortedCore
-        {
-            get { return _isSorted; }
-        }
+        protected override bool IsSortedCore => _isSorted;
 
-        protected override ListSortDirection SortDirectionCore
-        {
-            get { return _sortDirection; }
-        }
+        protected override ListSortDirection SortDirectionCore => _sortDirection;
 
-        protected override PropertyDescriptor SortPropertyCore
-        {
-            get { return _sortProperty; }
-        }
+        protected override PropertyDescriptor SortPropertyCore => _sortProperty;
 
         protected override void RemoveSortCore()
         {
@@ -104,10 +92,7 @@ namespace NetsphereScnTool.Utility
             Sort(Compare);
         }
 
-        public void Sort(PropertyDescriptor prop, ListSortDirection direction)
-        {
-            ApplySortCore(prop, direction);
-        }
+        public void Sort(PropertyDescriptor prop, ListSortDirection direction) => ApplySortCore(prop, direction);
 
         public void Sort(Comparison<T> comparison)
         {
@@ -155,10 +140,7 @@ namespace NetsphereScnTool.Utility
             return lhsValue.ToString().CompareTo(rhsValue.ToString());
         }
 
-        public IList<T> InnerItems
-        {
-            get { return Items; }
-        }
+        public IList<T> InnerItems => Items;
 
     }
 }

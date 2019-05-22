@@ -48,9 +48,6 @@ namespace NetsphereScnTool.Scene.Chunks
             }
         }
 
-        public override string ToString()
-        {
-            return Name + " - " + SubName;
-        }
+        public override string ToString() => Name + " - " + SubName;
     }
 }

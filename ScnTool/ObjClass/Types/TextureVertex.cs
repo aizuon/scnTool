@@ -30,9 +30,6 @@ namespace ObjParser.Types
             Y = y;
         }
 
-        public override string ToString()
-        {
-            return string.Format("vt {0} {1}", X, Y);
-        }
+        public override string ToString() => string.Format("vt {0} {1}", X, Y);
     }
 }

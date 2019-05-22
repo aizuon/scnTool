@@ -49,24 +49,24 @@ namespace NetsphereScnTool.Utility
             foreach (var vertex in model.Mesh.Vertices)
             {
                 var v = Vector3.Transform(vertex, model.Matrix);  //Matrice invertita
-                w.WriteLine(string.Format(CultureInfo.InvariantCulture, "v {0:0.0000} {1:0.0000} {2:0.0000}", v.X/100, v.Y/100, v.Z/100));
+                w.WriteLine(string.Format(CultureInfo.InvariantCulture, "v {0:0.0000} {1:0.0000} {2:0.0000}", v.X / 100, v.Y / 100, v.Z / 100));
             }
             w.WriteLine();
             foreach (var vn in model.Mesh.Normals)
-                w.WriteLine(string.Format(CultureInfo.InvariantCulture, "vn {0:0.0000} {1:0.0000} {2:0.0000}", vn.X/100, vn.Y/100, vn.Z/100));
+                w.WriteLine(string.Format(CultureInfo.InvariantCulture, "vn {0:0.0000} {1:0.0000} {2:0.0000}", vn.X / 100, vn.Y / 100, vn.Z / 100));
             w.WriteLine();
             foreach (var vt in model.Mesh.UV)
-                w.WriteLine(string.Format(CultureInfo.InvariantCulture, "vt {0:0.0000} {1:0.0000} {2:0.0000}", vt.X/100, 0.0f - vt.Y/100, 0.0f));
+                w.WriteLine(string.Format(CultureInfo.InvariantCulture, "vt {0:0.0000} {1:0.0000} {2:0.0000}", vt.X / 100, 0.0f - vt.Y / 100, 0.0f));
             w.WriteLine();
             w.WriteLine("g " + model.Name);
             // Face indices: S4 starts at 0 - Wavefront OBJ at 1
             foreach (var texture in model.TextureData.Textures)
             {
-                var tex = texture.FileName;
-                foreach (var c in Path.GetInvalidPathChars())
+                string tex = texture.FileName;
+                foreach (char c in Path.GetInvalidPathChars())
                     tex = tex.Replace(c, '?');
 
-                foreach (var c in Path.GetInvalidFileNameChars())
+                foreach (char c in Path.GetInvalidFileNameChars())
                     tex = tex.Replace(c, '?');
 
                 tex = tex.Replace("?", "");
@@ -90,11 +90,11 @@ namespace NetsphereScnTool.Utility
             var ls = new List<string>();
             foreach (var texture in model.TextureData.Textures)
             {
-                var tex = texture.FileName;
-                foreach (var c in Path.GetInvalidPathChars())
+                string tex = texture.FileName;
+                foreach (char c in Path.GetInvalidPathChars())
                     tex = tex.Replace(c, '?');
 
-                foreach (var c in Path.GetInvalidFileNameChars())
+                foreach (char c in Path.GetInvalidFileNameChars())
                     tex = tex.Replace(c, '?');
 
                 tex = tex.Replace("?", "");
@@ -130,28 +130,28 @@ namespace NetsphereScnTool.Utility
                 foreach (var vertex in model.Mesh.Vertices)
                 {
                     var v = Vector3.Transform(vertex, model.Matrix);
-                    w.WriteLine(string.Format(CultureInfo.InvariantCulture, "v {0:0.0000} {1:0.0000} {2:0.0000}", v.X/100, v.Y/100, v.Z/100));
+                    w.WriteLine(string.Format(CultureInfo.InvariantCulture, "v {0:0.0000} {1:0.0000} {2:0.0000}", v.X / 100, v.Y / 100, v.Z / 100));
                 }
                 w.WriteLine();
                 foreach (var vn in model.Mesh.Normals)
                 {
-                    w.WriteLine(string.Format(CultureInfo.InvariantCulture, "vn {0:0.0000} {1:0.0000} {2:0.0000}", vn.X/100, vn.Y/100, vn.Z/100));
+                    w.WriteLine(string.Format(CultureInfo.InvariantCulture, "vn {0:0.0000} {1:0.0000} {2:0.0000}", vn.X / 100, vn.Y / 100, vn.Z / 100));
                 }
                 w.WriteLine();
                 foreach (var vt in model.Mesh.UV)
                 {
-                    w.WriteLine(string.Format(CultureInfo.InvariantCulture, "vt {0:0.0000} {1:0.0000} {2:0.0000}", vt.X/100, 0.0f - vt.Y/100, 0.0f));
+                    w.WriteLine(string.Format(CultureInfo.InvariantCulture, "vt {0:0.0000} {1:0.0000} {2:0.0000}", vt.X / 100, 0.0f - vt.Y / 100, 0.0f));
                 }
                 w.WriteLine();
                 w.WriteLine("g " + model.Name);
                 // Face indices: S4 starts at 0 - Wavefront OBJ at 1
                 foreach (var texture in model.TextureData.Textures)
                 {
-                    var tex = texture.FileName;
-                    foreach (var c in Path.GetInvalidPathChars())
+                    string tex = texture.FileName;
+                    foreach (char c in Path.GetInvalidPathChars())
                         tex = tex.Replace(c, '?');
 
-                    foreach (var c in Path.GetInvalidFileNameChars())
+                    foreach (char c in Path.GetInvalidFileNameChars())
                         tex = tex.Replace(c, '?');
 
                     tex = tex.Replace("?", "");
@@ -179,11 +179,11 @@ namespace NetsphereScnTool.Utility
             {
                 foreach (var texture in model.TextureData.Textures)
                 {
-                    var tex = texture.FileName;
-                    foreach (var c in Path.GetInvalidPathChars())
+                    string tex = texture.FileName;
+                    foreach (char c in Path.GetInvalidPathChars())
                         tex = tex.Replace(c, '?');
 
-                    foreach (var c in Path.GetInvalidFileNameChars())
+                    foreach (char c in Path.GetInvalidFileNameChars())
                         tex = tex.Replace(c, '?');
 
                     tex = tex.Replace("?", "");

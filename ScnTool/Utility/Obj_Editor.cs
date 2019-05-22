@@ -6,10 +6,7 @@ namespace NetsphereScnTool.Utility
 {
     public class Obj_Editor
     {
-        public void EditShader(ModelChunk model, Shader shader)
-        {
-            model.Shader = shader;
-        }
+        public void EditShader(ModelChunk model, Shader shader) => model.Shader = shader;
 
         public void ChangeTexture(ModelChunk model, IList<string> textures)
         {
@@ -31,14 +28,8 @@ namespace NetsphereScnTool.Utility
             model.TextureData.Textures = txt;
         }
 
-        public void EditAnimation(BoneChunk bone, IList<BoneAnimation> animation)
-        {
-            bone.Animation = animation;
-        }
+        public void EditAnimation(BoneChunk bone, IList<BoneAnimation> animation) => bone.Animation = animation;
 
-        public void EditAnimation(ModelChunk model, IList<ModelAnimation> animation)
-        {
-            model.Animation = animation;
-        }
+        public void EditAnimation(ModelChunk model, IList<ModelAnimation> animation) => model.Animation = animation;
     }
 }

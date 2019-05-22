@@ -9,8 +9,8 @@
         public double ZMax { get; set; }
         public double ZMin { get; set; }
 
-        public double XSize { get { return XMax - XMin; } }
-        public double YSize { get { return YMax - YMin; } }
-        public double ZSize { get { return ZMax - ZMin; } }
+        public double XSize => XMax - XMin;
+        public double YSize => YMax - YMin;
+        public double ZSize => ZMax - ZMin;
     }
 }

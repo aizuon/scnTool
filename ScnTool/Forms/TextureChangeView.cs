@@ -26,7 +26,7 @@ namespace NetsphereScnTool.Forms
 
         private void ApplyTexture_Click(object sender, EventArgs e)
         {
-            var split = txts.Text.Split(Environment.NewLine.ToCharArray());
+            string[] split = txts.Text.Split(Environment.NewLine.ToCharArray());
             var slist = split.ToList();
             slist.Remove(string.Empty);
             Textures = slist;

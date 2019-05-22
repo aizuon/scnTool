@@ -22,9 +22,6 @@ namespace ObjParser.Types
             b = float.Parse(data[3]);
         }
 
-        public override string ToString()
-        {
-            return string.Format("{0} {1} {2}", r, g, b);
-        }
+        public override string ToString() => string.Format("{0} {1} {2}", r, g, b);
     }
 }
